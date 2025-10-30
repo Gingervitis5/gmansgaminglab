@@ -10,7 +10,7 @@ export default function Home() {
             src="/images/GMan Logo.png" 
             height={150} 
             width={450} 
-            alt="Your Name"
+            alt="GMan Logo"
         />
       </Head>
       
