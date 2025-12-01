@@ -6,9 +6,10 @@
 @theme{
   --font-poppins:Poppins, sans-serif;
   --color-shop_light_pink: #fcf0e4;
-  --color-shop_red: #F02757;
+  --color-shop_red: #D34E4E;
   --color-shop_dark_green: #063c28;
   --color-shop_snow: #F5FEFD;
+  --color-shop_clay: #CE7E5A;
 }
 
 @theme inline {

@@ -8,7 +8,7 @@ const Home = () => {
           <p>
             Lorem Ipsum
           </p>
-          <Button size="lg">Check out</Button>
+          <Button size="lg">Check Out</Button>
         </Container>
 }
 

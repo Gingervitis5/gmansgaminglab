@@ -1,4 +1,4 @@
 export const headerData = [
     {title: "Home", href: "/"},
-    {title: "Playmats", href: "/"}
+    {title: "Playmats", href: "/playmats"}
 ]
