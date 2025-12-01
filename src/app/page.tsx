@@ -3,12 +3,8 @@ import { Button } from "../components/ui/button"
 import Container from "@/components/Container"
 
 const Home = () => {
-  return <Container className="bg-shop_light_pink">
+  return <Container className="bg-shop_snow">
           <h2 className="text-xl font-semibold">Home</h2>
-          <p>
-            Lorem Ipsum
-          </p>
-          <Button size="lg">Check Out</Button>
         </Container>
 }
 

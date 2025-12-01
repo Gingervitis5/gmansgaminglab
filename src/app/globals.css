@@ -8,8 +8,13 @@
   --color-shop_sand: #DDC57A;
   --color-shop_red: #D34E4E;
   --color-shop_dark_green: #063c28;
-  --color-shop_snow: #F5FEFD;
+  --color-shop_white: #F5F5F0;
   --color-shop_clay: #CE7E5A;
+  --color-shop_tan: #F9E7B2;
+}
+
+button{
+  @apply hover:cursor-pointer
 }
 
 @theme inline {
