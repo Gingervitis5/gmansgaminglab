@@ -8,12 +8,16 @@ import FavoriteButton from "./FavoriteButton";
 import SignIn from "./SignIn";
 import MobileMenu from "./MobileMenu";
 import { Pixelify_Sans } from 'next/font/google';
+import { currentUser } from "@clerk/nextjs/server";
+import { ClerkLoaded, SignedIn, SignInButton, UserButton } from "@clerk/nextjs";
 const pixelify = Pixelify_Sans({
     subsets:['cyrillic'],
     weight:['400']
 })
 
-const Header = () => {
+const Header = async() => {
+    const user = await currentUser();
+    console.log(user, "user");
     return (
         <header className="bg-color-shop_white py-5 border-b border-b-black/25">
             <Container className="flex items-center justify-between">
@@ -26,7 +30,12 @@ const Header = () => {
                     <SearchBar />
                     <CartIcon />
                     <FavoriteButton />
-                    <SignIn />
+                    <ClerkLoaded>
+                        <SignedIn>
+                            <UserButton />
+                        </SignedIn>
+                        {!user && <SignIn />}
+                    </ClerkLoaded>
                 </div>
             </Container>
         </header>
