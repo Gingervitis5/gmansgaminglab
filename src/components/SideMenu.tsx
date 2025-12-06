@@ -13,8 +13,8 @@ interface SidebarProps{
 const SideMenu:FC<SidebarProps> = ({isOpen, onClose}) => {
     const pathname = usePathname();
   return (
-    <div className={`fixed inset-y-0 h-screen left-0 z-50 w-full bg-black/80 text-shop_snow/80 shadow-xl ${isOpen? "translate-x-0" : "-translate-x-full"} hoverEffect`}>
-        <div className="min-w-72 max-w-96 bg-shop_white h-screen p-5 border-r-4 border-r-shop_red flex-col gap-6">
+    <div className={`fixed inset-y-0 h-screen left-0 z-50 w-full bg-black/80 text-shop_white/80 shadow-xl ${isOpen? "translate-x-0" : "-translate-x-full"} hoverEffect`}>
+        <div className="min-w-72 max-w-96 bg-shop_dark h-screen p-5 border-r-4 border-r-shop_sand flex-col gap-6">
             <div className="flex items-center justify-between gap-1">
                 <NavText 
                     className="text-shop_red hover:text-shop_clay hoverEffect"
