@@ -12,8 +12,8 @@ const HomeBanner = () => {
             <Title>Welcome to the Lab!</Title>
         </div>
         <div>
-            <Link href={"/playmats"} className="tracking-normal bg-shop_sand font-pixelify font-medium text-shop_red mr-4 px-4 py-2 rounded-md border-2 border-shop_red text-lg hover:text-shop_white">Shop Playmats</Link>
-            <Link href={"/maps"} className="tracking-normal bg-shop_sand font-pixelify font-medium text-shop_red mr-4 px-4 py-2 rounded-md border-2 border-shop_red text-lg hover:text-shop_white">Shop Maps</Link>
+            <Link href={"/playmats"} className="tracking-wide bg-shop_sand font-pixelify font-bold text-shop_red mr-4 px-4 py-2 rounded-md text-lg hover:text-shop_white">Shop Playmats</Link>
+            <Link href={"/maps"} className="tracking-wide bg-shop_sand font-pixelify font-bold text-shop_red mr-4 px-4 py-2 rounded-md text-lg hover:text-shop_white">Shop Maps</Link>
         </div>
       </div>
   );
