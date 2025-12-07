@@ -1,3 +1,5 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -5,12 +7,12 @@
 
 @theme{
   --font-poppins:Poppins, sans-serif;
+  --font-pixelify: 'Pixelify Sans', sans-serif;
   --color-shop_sand: #F5D061;
   --color-shop_red: #DC0000;
   --color-shop_white: #FFFFFF;
   --color-shop_dark: #2C2C2C;
   --color-shop_gray: #9AA6B2;
-  --color-shop_tan: #F9E7B2;
 }
 
 button{
