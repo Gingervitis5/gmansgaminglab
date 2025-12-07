@@ -2,8 +2,6 @@ import { Title } from './ui/text';
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Space } from 'lucide-react';
-import { banner_1 } from '../../public/images';
 
 const HomeBanner = () => {
   return (

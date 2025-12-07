@@ -40,7 +40,9 @@ export default function RootLayout({
         <body className="font-poppins antialiased">
           <div className="flex flex-col min-h-screen">
             <Header />
-              <main className="flex-1 bg-linear-to-b from-shop_dark via-shop_darker to-shop_darkest">{children}</main>
+              <main className="flex-1 bg-linear-to-b from-shop_dark via-shop_darker to-shop_darkest">
+                {children}
+              </main>
             <Footer />
           </div>
         </body>

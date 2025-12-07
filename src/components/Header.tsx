@@ -17,7 +17,6 @@ const pixelify = Pixelify_Sans({
 
 const Header = async() => {
     const user = await currentUser();
-    console.log(user, "user");
     return (
         <header className="bg-shop_dark py-5 border-b-5 border-shop_light_blue">
             <Container className="flex items-center justify-between">
