@@ -7,8 +7,8 @@ const Logo = ({className}:{className?:string}) => {
         <Image 
         src="/images/GMan Logo.png" 
         alt="Pixel Logo"
-        width={400}
-        height={140}
+        width={330}
+        height={130}
         />
   )
 }
