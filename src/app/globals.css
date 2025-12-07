@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -11,8 +11,9 @@
   --color-shop_sand: #F5D061;
   --color-shop_red: #DC0000;
   --color-shop_white: #FFFFFF;
-  --color-shop_dark: #2C2C2C;
-  --color-shop_gray: #9AA6B2;
+  --color-shop_dark: #2C2A2A;
+  --color-shop_darker: #191717;
+  --color-shop_darkest: #100F0F;
 }
 
 button{
