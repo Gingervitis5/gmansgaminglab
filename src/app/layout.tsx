@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className="font-poppins antialiased">
+        <body className="font-pixelify antialiased">
           <div className="flex flex-col min-h-screen">
             <Header />
               <main className="flex-1 bg-linear-to-b from-shop_dark via-shop_darker to-shop_darkest">

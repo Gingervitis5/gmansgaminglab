@@ -6,15 +6,21 @@ import React, { useState, useEffect } from 'react';
 const data = [
     {
         title: "Email Us",
-        subtitle: "average.magic.gamer@gmail.com",
+        subtitle: "gmansgaminglab@gmail.com",
         iconSrc: "/images/Email_Icon.png", // Store only the path
-        altText: "Pixel_Logo"
+        altText: "Pixel_Email"
+    },
+    {
+        title: "Buy me a coffee",
+        subtitle: "https://buymeacoffee.com/gmansgaminglab",
+        iconSrc: "/images/Coffee.png", // Store only the path
+        altText: "Pixel_Coffee"
     }
 ];
 
 const FooterTop = () => {
     return (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 border-b border-b-shop_light_blue">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 border-b-2 border-b-shop_light_blue">
         {data?.map((item, index) => (
             <div key={index} className="flex items-center gap-3 group p-3 transition-colors">
             <Image
