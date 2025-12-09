@@ -1,9 +1,9 @@
 import { defineType, defineField } from "sanity";
 import { TagIcon } from "@sanity/icons"
 
-export const themeType = defineType({
-    name: "theme",
-    title: "Theme",
+export const blogCategoryType = defineType({
+    name: "blogcategory",
+    title: "Blog Category",
     type: "document",
     icon: TagIcon,
     fields: [
@@ -15,20 +15,12 @@ export const themeType = defineType({
             name: "slug",
             type:"slug",
             options:{
-                source: "title",
-                maxLength: 96
+                source: "title"
             },
-            validation: (Rule) => Rule.required()
         }),
         defineField({
             name: "description",
-            type: "text"
+            type: "text",
         })
     ],
-    preview: {
-        select: {
-            title: "title",
-            subtitle: "description",
-        }
-    }
 });
