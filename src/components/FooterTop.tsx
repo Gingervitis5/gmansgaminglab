@@ -11,7 +11,7 @@ const data = [
         altText: "Pixel_Email"
     },
     {
-        title: "Buy me a coffee",
+        title: "Buy me a coffee!",
         subtitle: "https://buymeacoffee.com/gmansgaminglab",
         iconSrc: "/images/Coffee.png", // Store only the path
         altText: "Pixel_Coffee"
