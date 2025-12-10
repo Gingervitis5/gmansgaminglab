@@ -5,9 +5,9 @@ import Image from 'next/image'
 const Logo = ({className}:{className?:string}) => {
   return (
         <Image 
-        src="/images/GMan Logo.png" 
+        src="/images/GMan_Logo.png" 
         alt="Pixel Logo"
-        width={350}
+        width={340}
         height={120}
         />
   )

@@ -1,10 +1,85 @@
-import { Container } from 'lucide-react'
-import React from 'react'
+import React from 'react';
+import FooterTop from './FooterTop';
+import SocialMedia from './SocialMedia';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Text } from 'lucide-react';
+import { SubText, SubTitle } from './ui/text';
+import { categoriesData, quickLinksData, themesData } from '@/constants/data';
 
 const Footer = () => {
   return (
-    <footer>
-        <Container>Footer</Container>
+    <footer className="bg-shop_darkest border-t-2 border-t-shop_light_blue">
+        <div>
+          <FooterTop />
+          <div className="py-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <div className="inline-flex ml-7">
+                <Image 
+                src="/images/Potion.png" 
+                alt="Pixel Tentacle"
+                width={100}
+                height={100}
+                />
+                <SubText>Explore the fantastical and visually appealing artworks we have brewed within the Lab.</SubText>
+              </div>
+              <div className="ml-14">
+                <SocialMedia 
+                  className="text-shop_light_blue"
+                  iconClassName="text-shop_light_blue/75"
+                />
+              </div>
+            </div>
+            <div className="ml-8">
+              <SubTitle>Quick Links:</SubTitle>
+              <ul className="text-shop_light_blue font-pixelify group-hover:text-shop_white">
+                  {quickLinksData?.map((item)=>(
+                    <li key={item?.title}>
+                      <Link 
+                      href={item?.href} 
+                      className="hover:text-shop_white font-light hoverEffect">
+                        {item?.title}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+            <div>
+              <SubTitle>Categories:</SubTitle>
+              <ul className="text-shop_light_blue font-pixelify group-hover:text-shop_white">
+                  {categoriesData?.map((item)=>(
+                    <li key={item?.title}>
+                      <Link 
+                      href={`/category/${item?.href}`} 
+                      className="hover:text-shop_white font-light hoverEffect">
+                        {item?.title}
+                      </Link>
+                    </li>
+                  ))}
+               </ul>
+            </div>
+            <div>
+              <SubTitle>Themes</SubTitle>
+              <ul className="text-shop_light_blue font-pixelify group-hover:text-shop_white">
+                  {themesData?.map((item)=>(
+                    <li key={item?.title}>
+                      <Link 
+                      href={`/theme/${item?.href}`} 
+                      className="hover:text-shop_white font-light hoverEffect">
+                        {item?.title}
+                      </Link>
+                    </li>
+                  ))}
+               </ul>
+            </div>
+          </div>
+          <div>
+            <p className="py-6 border-t-2 border-shop_light_blue text-center text-sm font-poppins font-light text-shop_light_blue">
+              © {new Date().getFullYear()}{" "}
+              GMan's Gaming Lab. All rights reserved.
+            </p>
+            </div>
+        </div>
     </footer>
   );
 };
