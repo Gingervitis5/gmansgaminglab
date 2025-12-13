@@ -60,7 +60,7 @@ const Footer = () => {
             </div>
             <div>
               <SubTitle>Themes</SubTitle>
-              <ul className="text-shop_light_blue font-pixelify group-hover:text-shop_white">
+              <ul className="text-shop_light_blue text-med font-pixelify group-hover:text-shop_white">
                   {themesData?.map((item)=>(
                     <li key={item?.title}>
                       <Link 

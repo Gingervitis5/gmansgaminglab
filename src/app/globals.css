@@ -8,11 +8,13 @@
 @theme{
   --font-poppins:Poppins, sans-serif;
   --font-pixelify: 'Pixelify Sans', sans-serif;
-  --color-shop_sand: #F5D061;
+  --color-shop_orange: #FB6C08;
   --color-shop_light_blue:#02E7FC;
+  --color-shop_dark_blue:#009FAD;
   --color-shop_red: #DC0000;
   --color-shop_white: #FFFFFF;
-  --color-shop_dark: #2C2A2A;
+  --color-shop_gray: #5F5F5F;
+  --color-shop_dark: #2B2727;
   --color-shop_darker: #191717;
   --color-shop_darkest: #100F0F;
 }

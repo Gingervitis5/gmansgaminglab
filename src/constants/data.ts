@@ -1,7 +1,7 @@
 export const headerData = [
     {title: "Home", href: "/"},
-    {title: "Playmats", href: "/playmats"},
-    {title: "Maps", href: "/maps"}
+    {title: "Shop", href: "/shop"},
+    {title: "Blog", href: "/blog"}
 ]
 
 export const quickLinksData = [
@@ -27,5 +27,11 @@ export const themesData = [
     {title: "Forest", href: "forest"},
     {title: "Otherworldly", href: "otherworldly"},
     {title: "Room", href: "room"},
+    {title: "Snow", href: "snow"},
     {title: "Underwater", href: "underwater"}
 ]
+
+export const productType = [
+    {title: "Playmats", value: "playmats"},
+    {title: "Maps", value: "maps"}
+];

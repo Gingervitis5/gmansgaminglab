@@ -18,7 +18,7 @@ const pixelify = Pixelify_Sans({
 const Header = async() => {
     const user = await currentUser();
     return (
-        <header className="bg-shop_dark py-5 border-b-5 border-shop_light_blue">
+        <header className="sticky top-0 z-50 bg-shop_dark/95 py-5 border-b-5 border-shop_light_blue backdrop-blur-md">
             <Container className="flex items-center justify-between">
                 <div className="w-auto md:w-1/3 flex items-center gap-2.5 justify-start md:gap-0">
                     <MobileMenu />

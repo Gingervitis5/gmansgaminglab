@@ -38,7 +38,7 @@ export default function RootLayout({
     <ClerkProvider>
           <div className="flex flex-col min-h-screen">
             <Header />
-              <main className="flex-1 bg-linear-to-b from-shop_dark via-shop_darker to-shop_darkest">
+              <main className="flex-1 bg-shop_darker">
                 {children}
               </main>
             <Footer />

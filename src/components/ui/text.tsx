@@ -7,7 +7,7 @@ export const Title=({
         children:React.ReactNode,
         className?:string
     })=>{
-        return <h2 className={cn("text-3xl md:text-5xl font-pixelify font-normal text-shop_light_blue tracking-wide", className)}>
+        return <h2 className={cn("text-3xl font-pixelify font-normal text-shop_light_blue tracking-wide", className)}>
                     {children}
                 </h2>
 }
