@@ -12,7 +12,7 @@ import AddToCartButton from './AddToCartButton';
 const ProductCard = ({product}: {product: Product}) => {
   return (
     <div className="text-sm border-2 border-shop_light_blue rounded-sm bg-shop_dark group hover:border-shop_white">
-        <div className="relative group overflow-hidden bg-shop_light_blue">
+        <div className="relative group overflow-hidden font-extralight tracking-widest bg-shop_light_blue">
             {product?.images && (
                 <Image 
                     src={urlFor(product?.images[0]).url()} 
@@ -27,8 +27,8 @@ const ProductCard = ({product}: {product: Product}) => {
             <AddToWishlistButton product={product}/>
             {product?.status === "sale" && 
                 (
-                    <p className="absolute top-2 left-2 z-10 pb-1 pt-1 pl-2 pr-2 
-                    text-shop_light_blue text-sm font-extralight rounded-full border-2 border-shop_red 
+                    <p className="absolute top-2 left-2 z-10 pb-1 pt-1 pl-3 pr-3 
+                    text-shop_light_blue font-extralight rounded-full border-2 border-shop_red 
                     bg-shop_darkest hover:border-shop_white hover:text-shop_white hoverEffect">
                         Sale
                     </p>
@@ -36,8 +36,8 @@ const ProductCard = ({product}: {product: Product}) => {
             }
             {product?.status === "new" && 
                 (
-                    <p className="absolute top-2 left-2 z-10 pb-1 pt-1 pl-2 pr-2 
-                    text-shop_light_blue text-sm font-extralight rounded-full border-2 border-shop_red 
+                    <p className="absolute top-2 left-2 z-10 pb-1 pt-1 pl-3 pr-3
+                    text-shop_light_blue font-extralight rounded-full border-2 border-shop_red 
                     bg-shop_darkest hover:border-shop_white hover:text-shop_white hoverEffect">
                         New
                     </p>
@@ -47,7 +47,7 @@ const ProductCard = ({product}: {product: Product}) => {
                 (
                 <Link 
                     href={"/deal"}
-                    className="absolute top-2 left-2 z-10 pb-1 pt-1 pl-2 pr-2 
+                    className="absolute top-2 left-2 z-10 pb-1 pt-1 pl-3 pr-3
                     text-shop_orange font-extralight rounded-full border-2 border-shop_red 
                     bg-shop_darkest hover:border-shop_white hover:text-shop_white hoverEffect"
                 >
@@ -60,7 +60,7 @@ const ProductCard = ({product}: {product: Product}) => {
                 )
             }
         </div>
-        <div className="p-2 gap-2 flex flex-col text-shop_light_blue/80 font-extralight">
+        <div className="p-2 flex flex-col text-shop_light_blue font-extralight">
             {product?.categories && 
                 (
                     <p className=" uppercase line-clamp-1">
@@ -68,7 +68,7 @@ const ProductCard = ({product}: {product: Product}) => {
                     </p>
                 )
             }
-            <Title className="text-sm line-clamp-2 text-shop_light_blue font-normal group-hover:text-shop_white hoverEffect">
+            <Title className="line-clamp-1 text-shop_light_blue text-lg font-jersey font-light group-hover:text-shop_white hoverEffect">
                 {product?.name}
             </Title>
             <div className="flex items-center gap-2"> 
@@ -93,10 +93,10 @@ const ProductCard = ({product}: {product: Product}) => {
             discount={product.discount}
             className="text-sm pl-2"
         />
-        <div className="pl-2  flex items-center">
+        <div className="pl-2 flex items-center">
             {product?.status === "unavailable" && 
                 (
-                    <div className="text-shop_red text-sm font-extralight p-1.5 pl-3 pr-3 pr-2 rounded-full border-2 border-shop_red bg-shop_darkest">
+                    <div className="text-center w-36 text-shop_red text-lg font-extralight pt-0.5 pb-0.5 mt-1 mb-1 rounded-full border-2 border-shop_red bg-shop_darkest">
                         Unavailable
                     </div>
                 )

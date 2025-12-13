@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10:wght@400&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -8,6 +9,7 @@
 @theme{
   --font-poppins:Poppins, sans-serif;
   --font-pixelify: 'Pixelify Sans', sans-serif;
+  --font-jersey: 'Jersey 10', sans-serif;
   --color-shop_orange: #FB6C08;
   --color-shop_light_blue:#02E7FC;
   --color-shop_dark_blue:#009FAD;

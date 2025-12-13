@@ -7,7 +7,7 @@ const HomeBanner = () => {
   return (
       <div className="bg-[url('/images/playmat_images/Containment_Breach.jpg')] bg-cover bg-position-[center_6.5%] mt-4 py-16 md:py10 rounded-lg lg:px-17 flex items-center justify-between">
         <div>
-            <Title>Welcome to the Lab!</Title>
+            <Title className="text-4xl">Welcome to the Lab!</Title>
         </div>
         
       </div>
