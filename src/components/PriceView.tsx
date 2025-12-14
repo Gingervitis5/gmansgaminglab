@@ -9,12 +9,17 @@ interface Props{
 
 const PriceView = ({price,discount,className}: Props) => {
   return (
-        <div className="flex items-center gap-2">
-            <PriceFormatter amount={price} className="text-shop_light_blue text-lg"/>
+        <div className="flex items-center gap-2 text-lg">
+            {price && !discount && (
+                <PriceFormatter 
+                    amount={price}
+                    className="text-shop_light_blue font-normal"
+                />
+            )}
             {price && discount && (
                 <PriceFormatter 
-                    amount={price + (discount * price) / 100 }
-                    className="line-through text-xs font-normal"
+                    amount={price - (discount * price) / 100 }
+                    className="text-shop_orange font-normal"
                 />
             )}
         </div>

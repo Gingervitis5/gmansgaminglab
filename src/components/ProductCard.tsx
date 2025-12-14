@@ -11,7 +11,7 @@ import AddToCartButton from './AddToCartButton';
 
 const ProductCard = ({product}: {product: Product}) => {
   return (
-    <div className="text-sm border-2 border-shop_light_blue rounded-sm bg-shop_dark group hover:border-shop_white">
+    <div className="border-2 border-shop_light_blue rounded-sm bg-shop_dark group hover:border-shop_white">
         <div className="relative group overflow-hidden font-extralight tracking-widest bg-shop_light_blue">
             {product?.images && (
                 <Image 
@@ -30,7 +30,7 @@ const ProductCard = ({product}: {product: Product}) => {
                     <p className="absolute top-2 left-2 z-10 pb-1 pt-1 pl-3 pr-3 
                     text-shop_light_blue font-extralight rounded-full border-2 border-shop_red 
                     bg-shop_darkest hover:border-shop_white hover:text-shop_white hoverEffect">
-                        Sale
+                        On Sale
                     </p>
                 )
             }

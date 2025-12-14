@@ -7,7 +7,7 @@ import Link from "next/link";
 const HeaderMenu = () => {
   const pathname = usePathname();
   return (
-    <div className="hidden md:inline-flex w-1/3 items-center gap-7 capitalize font-jersey font-extralight text-lightColor" >
+    <div className="hidden md:inline-flex w-1/3 items-center justify-center gap-7 capitalize font-jersey font-extralight text-lightColor" >
         {headerData?.map((item)=>(
           <Link key = {item?.title} href={item?.href} className={`text-shop_light_blue text-4xl tracking-wider hover:text-shop_white hoverEffect relative group ${pathname === item?.href && "text-shop_red"}`}>
             {item?.title}

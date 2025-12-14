@@ -29,9 +29,9 @@ const FooterTop = () => {
                 width={55}
                 height={55}
             />
-            <div>
-                <h3 className="text-shop_light_blue text-lg font-pixelify font-light group-hover:text-shop_white">{item.title}</h3>
-                <p className="text-shop_light_blue text-lg font-pixelify font-light group-hover:text-shop_white">{item.subtitle}</p>
+            <div className="tracking-wide">
+                <h3 className="text-shop_light_blue text-2xl font-jersey font-light group-hover:text-shop_white">{item.title}</h3>
+                <p className="text-shop_light_blue text-lg font-jersey font-light group-hover:text-shop_white">{item.subtitle}</p>
             </div>
             </div>
         ))}

@@ -9,10 +9,10 @@ import { categoriesData, quickLinksData, themesData } from '@/constants/data';
 
 const Footer = () => {
   return (
-    <footer className="bg-shop_darkest border-t-2 border-t-shop_light_blue">
+    <footer className="bg-shop_darkest border-t-2 border-t-shop_light_blue font-jersey">
         <div>
           <FooterTop />
-          <div className="py-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+          <div className="py-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 tracking-wide">
             <div>
               <div className="inline-flex ml-7">
                 <Image 
@@ -21,7 +21,7 @@ const Footer = () => {
                 width={100}
                 height={100}
                 />
-                <SubText>Explore the fantastical and visually appealing artworks we have brewed within the Lab.</SubText>
+                <SubText className="text-center text-2xl">Explore the fantastical and visually appealing artworks we have brewed within the Lab.</SubText>
               </div>
               <div className="ml-14">
                 <SocialMedia 
@@ -32,7 +32,7 @@ const Footer = () => {
             </div>
             <div className="ml-8">
               <SubTitle>Quick Links:</SubTitle>
-              <ul className="text-shop_light_blue font-pixelify group-hover:text-shop_white">
+              <ul className="text-shop_light_blue font-jersey group-hover:text-shop_white">
                   {quickLinksData?.map((item)=>(
                     <li key={item?.title}>
                       <Link 
@@ -43,34 +43,6 @@ const Footer = () => {
                     </li>
                   ))}
               </ul>
-            </div>
-            <div>
-              <SubTitle>Categories:</SubTitle>
-              <ul className="text-shop_light_blue font-pixelify group-hover:text-shop_white">
-                  {categoriesData?.map((item)=>(
-                    <li key={item?.title}>
-                      <Link 
-                      href={`/category/${item?.href}`} 
-                      className="hover:text-shop_white font-light hoverEffect">
-                        {item?.title}
-                      </Link>
-                    </li>
-                  ))}
-               </ul>
-            </div>
-            <div>
-              <SubTitle>Themes</SubTitle>
-              <ul className="text-shop_light_blue text-med font-pixelify group-hover:text-shop_white">
-                  {themesData?.map((item)=>(
-                    <li key={item?.title}>
-                      <Link 
-                      href={`/theme/${item?.href}`} 
-                      className="hover:text-shop_white font-light hoverEffect">
-                        {item?.title}
-                      </Link>
-                    </li>
-                  ))}
-               </ul>
             </div>
           </div>
           <div>

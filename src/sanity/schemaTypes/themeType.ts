@@ -23,7 +23,15 @@ export const themeType = defineType({
         defineField({
             name: "description",
             type: "text"
-        })
+        }),
+        defineField({
+            name: "image",
+            title: "Theme Image",
+            type: "image",
+            options: {
+                hotspot: true
+            }
+        }),
     ],
     preview: {
         select: {
