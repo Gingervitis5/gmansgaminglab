@@ -1,5 +1,5 @@
 "use client";
-import { Category, Product } from "../../sanity.types";
+import { Product, Theme } from "../../sanity.types";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
@@ -10,29 +10,29 @@ import NoProductAvailable from "./NoProductAvailable";
 import ProductCard from "./ProductCard";
 
 interface Props{
-    categories: Category[];
+    themes: Theme[];
     slug: string;
 }
 
-const CategoryProducts = ({categories, slug}: Props) => {
+const ThemeProducts = ({themes, slug}: Props) => {
     const [currentSlug, setCurrentSlug] = useState(slug);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
-    const handleCategoryChange = (newSlug: string) => {
+    const handleThemeChange = (newSlug: string) => {
         if(newSlug === currentSlug) return; // Prevent unnecessary updates
         setCurrentSlug(newSlug);
-        router.push(`/category/${newSlug}`, {scroll: false}); // Update URL
+        router.push(`/theme/${newSlug}`, {scroll: false}); // Update URL
     };
 
-    const fetchProducts = async(categorySlug: string)=>{
+    const fetchProducts = async(themeSlug: string)=>{
         setLoading(true);
         try{
-            const query = `*[_type == "product" && references(*[_type == "category" && slug.current == $categorySlug]._id)] | order(name asc){
-                            ...,"categories": categories[]->title
+            const query = `*[_type == "product" && references(*[_type == "theme" && slug.current == $themeSlug]._id)] | order(name asc){
+                            ..., "themes": themes[]->title, "categories": categories[]->title
                             }`;
-            const data = await client.fetch(query, {categorySlug});
+            const data = await client.fetch(query, {themeSlug});
             setProducts(data);
         }catch(error){
             console.log("Error fetching products: ", error);
@@ -49,16 +49,16 @@ const CategoryProducts = ({categories, slug}: Props) => {
   return (
     <div className="py-5 flex flex-col md:flex-row items-start gap-5">
         <div className="flex flex-col md:min-w-40 ">
-            {categories?.map((category)=>( 
+            {themes?.map((theme)=>( 
                 <Button
-                    onClick={()=>handleCategoryChange(category?.slug?.current as string)}
-                    key={category?._id}
+                    onClick={()=>handleThemeChange(theme?.slug?.current as string)}
+                    key={theme?._id}
                     className={`bg-shop_dark p-0 m-1 border border-shop_light_blue
                         text-shop_light_blue text-2xl shadow-none hover:text-shop_white hover:border-shop_white tracking-wider
-                        hoverEffect transition-colors capitalize ${category?.slug?.current === currentSlug && "bg-shop_darkest text-shop_white border-shop_white"}`}
+                        hoverEffect transition-colors capitalize ${theme?.slug?.current === currentSlug && "bg-shop_darkest text-shop_white border-shop_white"}`}
                 >
                     <p>
-                        {category?.title}
+                        {theme?.title}
                     </p>
                 </Button>
             ))}
@@ -83,7 +83,7 @@ const CategoryProducts = ({categories, slug}: Props) => {
             </div>
             ) : (
             <NoProductAvailable
-                selectedTab={`${currentSlug} products`}
+                selectedTab={`${currentSlug} themes`}
                 className="mt-0 w-full capitalize"
             />
             )}
@@ -92,4 +92,4 @@ const CategoryProducts = ({categories, slug}: Props) => {
   )
 }
 
-export default CategoryProducts
+export default ThemeProducts

@@ -21,7 +21,7 @@ const NoSalesAvailable = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
-        className="text-shop_light_blue text-lg font-light"
+        className="text-shop_light_blue text-2xl font-light"
       >
         Please check back later for new and exciting deals.
       </motion.p>

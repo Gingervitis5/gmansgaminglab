@@ -34,11 +34,7 @@ const NoProductAvailable = ({
         transition={{ delay: 0.2, duration: 0.5 }}
         className="text-shop_light_blue text-lg font-light"
       >
-        We&apos;re sorry, but there are no products matching on{" "}
-        <span className="text-base font-semibold text-shop_light_blue">
-          {selectedTab}
-        </span>{" "}
-        criteria at the moment.
+        We&apos;re sorry, but there are no products matching the given criteria.
       </motion.p>
 
       <motion.div

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react'
 import Image from 'next/image';
-import { Title } from './ui/text';
+import { SubTitle, Title } from './ui/text';
 import { getAllThemes } from '@/sanity/queries';
 import { urlFor } from '@/sanity/lib/image';
 
@@ -20,21 +20,27 @@ const ShopByTheme = async() => {
         </div>
         <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-2.5  hoverEffect">
             {themes?.map((themes)=>(
-                <Link 
-                    href={`/theme/${themes?.slug?.current}`}
-                    key={themes?._id}
-                    className="bg-shop_dark flex items-center justify-center w-34 h-34
-                                overflow-hidden"
-                >
-                    {themes?.image && 
-                    <Image 
-                        src={urlFor(themes?.image).url()}
-                        alt="themeImage"
-                        width={250}
-                        height={250}
-                        className="w-20 h-20 object-contain border-2 border-shop_light_blue hover:border-shop_white hoverEffect bg-shop_darkest"
-                    />}
-                </Link>
+                <div key={themes?._id}>
+                    <Link 
+                        href={`/theme/${themes?.slug?.current}`}
+                        className="bg-shop_dark flex items-center justify-center w-34 h-34
+                                    overflow-hidden"
+                    >
+                        {themes?.image && 
+                        <Image 
+                            src={urlFor(themes?.image).url()}
+                            alt="themeImage"
+                            width={250}
+                            height={250}
+                            className="w-20 h-20 object-contain border-2 border-shop_light_blue hover:border-shop_white hoverEffect bg-shop_darkest"
+                        />}
+                    </Link>
+                    <div className="flex justify-center">
+                        <SubTitle className="space-y-1 relative group">
+                            {themes?.title}
+                        </SubTitle>
+                    </div>
+                </div>
             ))}
         </div>
     </div>

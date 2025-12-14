@@ -68,7 +68,7 @@ const ProductCard = ({product}: {product: Product}) => {
                     </p>
                 )
             }
-            <Title className="line-clamp-1 text-shop_light_blue text-lg font-jersey font-light group-hover:text-shop_white hoverEffect">
+            <Title className="line-clamp-2 text-shop_light_blue text-lg font-jersey font-light group-hover:text-shop_white hoverEffect">
                 {product?.name}
             </Title>
             <div className="flex items-center gap-2"> 
