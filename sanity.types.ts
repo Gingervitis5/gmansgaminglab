@@ -524,6 +524,63 @@ export type SALES_QUERYResult = Array<{
   variant?: "maps" | "playmats";
   isFeatured?: boolean;
 }>;
+// Variable: PRODUCT_BY_SLUG_QUERY
+// Query: *[_type == "product" && slug.current == $slug] | order(name asc)
+export type PRODUCT_BY_SLUG_QUERYResult = Array<{
+  _id: string;
+  _type: "product";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+  commanders?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+  description?: string;
+  price?: number;
+  discount?: number;
+  categories?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "category";
+  }>;
+  themes?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "theme";
+  }>;
+  status?: "hot" | "new" | "sale" | "unavailable";
+  variant?: "maps" | "playmats";
+  isFeatured?: boolean;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -532,5 +589,6 @@ declare module "@sanity/client" {
     "*[_type == \"theme\"] | order(title asc)": THEMES_QUERYResult;
     "*[_type == \"blog\" && isLatest == true] | order(publishedAt desc) {\n  ...,\n  blogcategories[]->{\n    title\n  }\n}": BLOG_QUERYResult;
     "*[_type == \"product\" && status == \"sale\"] | order(name asc){\n    ..., \"categories\": categories[]->title\n  }": SALES_QUERYResult;
+    "*[_type == \"product\" && slug.current == $slug] | order(name asc)": PRODUCT_BY_SLUG_QUERYResult;
   }
 }
