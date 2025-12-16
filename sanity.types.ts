@@ -96,7 +96,14 @@ export type Order = {
     address?: string;
     name?: string;
   };
-  status?: "pending" | "processing" | "paid" | "shipped" | "out_for_delivery" | "delivered" | "cancelled";
+  status?:
+    | "pending"
+    | "processing"
+    | "paid"
+    | "shipped"
+    | "out_for_delivery"
+    | "delivered"
+    | "cancelled";
   orderDate?: string;
 };
 
@@ -216,37 +223,40 @@ export type Blog = {
   body?: BlockContent;
 };
 
-export type BlockContent = Array<{
-  children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-  listItem?: "bullet";
-  markDefs?: Array<{
-    href?: string;
-    _type: "link";
-    _key: string;
-  }>;
-  level?: number;
-  _type: "block";
-  _key: string;
-} | {
-  asset?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-  };
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt?: string;
-  _type: "image";
-  _key: string;
-}>;
+export type BlockContent = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+      listItem?: "bullet";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
+  | {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+      _key: string;
+    }
+>;
 
 export type Blogcategory = {
   _id: string;
@@ -411,12 +421,34 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Theme | SanityImageCrop | SanityImageHotspot | Slug | Order | Product | Category | Blog | BlockContent | Blogcategory | Author | Address | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes =
+  | Theme
+  | SanityImageCrop
+  | SanityImageHotspot
+  | Slug
+  | Order
+  | Product
+  | Category
+  | Blog
+  | BlockContent
+  | Blogcategory
+  | Author
+  | Address
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityImageMetadata
+  | SanityFileAsset
+  | SanityAssetSourceData
+  | SanityImageAsset
+  | Geopoint;
+
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./src/sanity/queries/query.ts
+
+// Source: src\sanity\queries\query.ts
 // Variable: THEMES_QUERY
 // Query: *[_type == "theme"] | order(title asc)
-export type THEMES_QUERYResult = Array<{
+export type THEMES_QUERY_RESULT = Array<{
   _id: string;
   _type: "theme";
   _createdAt: string;
@@ -438,9 +470,11 @@ export type THEMES_QUERYResult = Array<{
     _type: "image";
   };
 }>;
+
+// Source: src\sanity\queries\query.ts
 // Variable: BLOG_QUERY
 // Query: *[_type == "blog" && isLatest == true] | order(publishedAt desc) {  ...,  blogcategories[]->{    title  }}
-export type BLOG_QUERYResult = Array<{
+export type BLOG_QUERY_RESULT = Array<{
   _id: string;
   _type: "blog";
   _createdAt: string;
@@ -473,9 +507,11 @@ export type BLOG_QUERYResult = Array<{
   isLatest?: boolean;
   body?: BlockContent;
 }>;
+
+// Source: src\sanity\queries\query.ts
 // Variable: SALES_QUERY
 // Query: *[_type == "product" && status == "sale"] | order(name asc){    ..., "categories": categories[]->title  }
-export type SALES_QUERYResult = Array<{
+export type SALES_QUERY_RESULT = Array<{
   _id: string;
   _type: "product";
   _createdAt: string;
@@ -524,9 +560,11 @@ export type SALES_QUERYResult = Array<{
   variant?: "maps" | "playmats";
   isFeatured?: boolean;
 }>;
+
+// Source: src\sanity\queries\query.ts
 // Variable: PRODUCT_BY_SLUG_QUERY
-// Query: *[_type == "product" && slug.current == $slug] | order(name asc)
-export type PRODUCT_BY_SLUG_QUERYResult = Array<{
+// Query: *[_type == "product" && slug.current == $slug] | order(name asc) [0]
+export type PRODUCT_BY_SLUG_QUERY_RESULT = {
   _id: string;
   _type: "product";
   _createdAt: string;
@@ -580,15 +618,23 @@ export type PRODUCT_BY_SLUG_QUERYResult = Array<{
   status?: "hot" | "new" | "sale" | "unavailable";
   variant?: "maps" | "playmats";
   isFeatured?: boolean;
+} | null;
+
+// Source: src\sanity\queries\query.ts
+// Variable: PRODUCT_CATEGORY_QUERY
+// Query: *[_type == "product" && slug.current == $slug] | order(name asc){    "categoryName": categories[]->title  }
+export type PRODUCT_CATEGORY_QUERY_RESULT = Array<{
+  categoryName: Array<string | null> | null;
 }>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"theme\"] | order(title asc)": THEMES_QUERYResult;
-    "*[_type == \"blog\" && isLatest == true] | order(publishedAt desc) {\n  ...,\n  blogcategories[]->{\n    title\n  }\n}": BLOG_QUERYResult;
-    "*[_type == \"product\" && status == \"sale\"] | order(name asc){\n    ..., \"categories\": categories[]->title\n  }": SALES_QUERYResult;
-    "*[_type == \"product\" && slug.current == $slug] | order(name asc)": PRODUCT_BY_SLUG_QUERYResult;
+    '*[_type == "theme"] | order(title asc)': THEMES_QUERY_RESULT;
+    '*[_type == "blog" && isLatest == true] | order(publishedAt desc) {\n  ...,\n  blogcategories[]->{\n    title\n  }\n}': BLOG_QUERY_RESULT;
+    '*[_type == "product" && status == "sale"] | order(name asc){\n    ..., "categories": categories[]->title\n  }': SALES_QUERY_RESULT;
+    '*[_type == "product" && slug.current == $slug] | order(name asc) [0]': PRODUCT_BY_SLUG_QUERY_RESULT;
+    '*[_type == "product" && slug.current == $slug] | order(name asc){\n    "categoryName": categories[]->title\n  }': PRODUCT_CATEGORY_QUERY_RESULT;
   }
 }

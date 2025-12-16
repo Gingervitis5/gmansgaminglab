@@ -1,5 +1,5 @@
 import { sanityFetch } from "../lib/live";
-import { BLOG_QUERY, THEMES_QUERY, SALES_QUERY, PRODUCT_BY_SLUG_QUERY } from "./query";
+import { BLOG_QUERY, THEMES_QUERY, SALES_QUERY, PRODUCT_BY_SLUG_QUERY, PRODUCT_CATEGORY_QUERY, PRODUCT_THEME_QUERY } from "./query";
 
 export const getCategories = async(quantity?: number) => {
     try{
@@ -61,6 +61,36 @@ export const getProductBySlug = async (slug: string) => {
     return product?.data || null;
   }catch(error){
     console.error("Error fetching product by slug: ", error);
+    return null;
+  }
+}
+
+export const getProductCatInfo = async (slug: string) => {
+  try {
+    const product = await sanityFetch({
+      query: PRODUCT_CATEGORY_QUERY,
+      params: {
+        slug
+      },
+    });
+    return product?.data || null;
+  }catch(error){
+    console.error("Error fetching product category info by slug: ", error);
+    return null;
+  }
+}
+
+export const getProductThemeInfo = async (slug: string) => {
+  try {
+    const product = await sanityFetch({
+      query: PRODUCT_THEME_QUERY,
+      params: {
+        slug
+      },
+    });
+    return product?.data || null;
+  }catch(error){
+    console.error("Error fetching product theme info by slug: ", error);
     return null;
   }
 }

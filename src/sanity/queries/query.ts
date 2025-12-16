@@ -21,7 +21,21 @@ const PRODUCT_BY_SLUG_QUERY = defineQuery(
   `*[_type == "product" && slug.current == $slug] | order(name asc) [0]`
 );
 
+const PRODUCT_CATEGORY_QUERY = defineQuery(
+  `*[_type == "product" && slug.current == $slug] | order(name asc){
+    "categoryName": categories[]->title
+  }`
+);
+
+const PRODUCT_THEME_QUERY = defineQuery(
+  `*[_type == "product" && slug.current == $slug] | order(name asc){
+    "themeName": themes[]->title
+  }`
+);
+
 export { THEMES_QUERY,
          BLOG_QUERY,
-        SALES_QUERY,
-        PRODUCT_BY_SLUG_QUERY }
+         SALES_QUERY,
+         PRODUCT_BY_SLUG_QUERY,
+         PRODUCT_CATEGORY_QUERY,
+         PRODUCT_THEME_QUERY }

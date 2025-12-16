@@ -50,9 +50,15 @@ const ImageView = ({images = [], isAvailable}: Props) => {
                 </div>
             </motion.div>
         </AnimatePresence>
-        <div>
+        <div className="grid grid-cols-6 gap-2 h-20 md:h-24">
             {images?.map((image) =>(
-                <button key={image?._key}>
+                <button
+                    key={image?._key}
+                    onClick={()=>setActive(image)}
+                    className={`border-2 border-shop_light_blue rounded-md overflow-hidden bg-shop_dark
+                    ${active?._key === image?._key ? "border-shop_white opacity-100" : "opacity-60"}
+                    ${isAvailable === "unavailable" ? "border-shop_red" : "border-shop_light_blue"}`}
+                >
                     <Image 
                         src={urlFor(image).url()}
                         alt={`Thumbnail ${image._key}`}

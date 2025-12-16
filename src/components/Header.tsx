@@ -28,7 +28,7 @@ const Header = async() => {
                 <div className="w-auto md:w-1/3 flex items-center justify-end gap-5">
                     <SearchBar />
                     <CartIcon />
-                    <FavoriteButton />
+                    <FavoriteButton className="w-7 h-7"/>
                     <ClerkLoaded>
                         <SignedIn>
                             <UserButton />
