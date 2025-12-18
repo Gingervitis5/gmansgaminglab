@@ -73,7 +73,7 @@ const SingleProductPage = async({
                         Free Delivery
                     </p>
                     <p className="text-shop_light_blue underline underline-offset-2">
-                        Enter your Postal code for Delivey Availability.
+                        Enter your Postal code for delivery availability.
                     </p>
                     </div>
                 </div>

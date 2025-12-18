@@ -627,6 +627,20 @@ export type PRODUCT_CATEGORY_QUERY_RESULT = Array<{
   categoryName: Array<string | null> | null;
 }>;
 
+// Source: src\sanity\queries\query.ts
+// Variable: PRODUCT_THEME_QUERY
+// Query: *[_type == "product" && slug.current == $slug] | order(name asc){    "themeName": themes[]->title  }
+export type PRODUCT_THEME_QUERY_RESULT = Array<{
+  themeName: Array<string | null> | null;
+}>;
+
+// Source: src\sanity\queries\query.ts
+// Variable: COMMANDERS_QUERY
+// Query: *[_type == "product" && slug.current == "demonic-consultation-playmat"] | order(name asc){    "images": commanders[].asset->url  }
+export type COMMANDERS_QUERY_RESULT = Array<{
+  images: Array<string | null> | null;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -636,5 +650,7 @@ declare module "@sanity/client" {
     '*[_type == "product" && status == "sale"] | order(name asc){\n    ..., "categories": categories[]->title\n  }': SALES_QUERY_RESULT;
     '*[_type == "product" && slug.current == $slug] | order(name asc) [0]': PRODUCT_BY_SLUG_QUERY_RESULT;
     '*[_type == "product" && slug.current == $slug] | order(name asc){\n    "categoryName": categories[]->title\n  }': PRODUCT_CATEGORY_QUERY_RESULT;
+    '*[_type == "product" && slug.current == $slug] | order(name asc){\n    "themeName": themes[]->title\n  }': PRODUCT_THEME_QUERY_RESULT;
+    '*[_type == "product" && slug.current == "demonic-consultation-playmat"] | order(name asc){\n    "images": commanders[].asset->url\n  }': COMMANDERS_QUERY_RESULT;
   }
 }

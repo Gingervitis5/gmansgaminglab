@@ -33,9 +33,16 @@ const PRODUCT_THEME_QUERY = defineQuery(
   }`
 );
 
+const COMMANDERS_QUERY = defineQuery(
+  `*[_type == "product" && slug.current == "demonic-consultation-playmat"] | order(name asc){
+    "images": commanders[].asset->url
+  }`
+);
+
 export { THEMES_QUERY,
          BLOG_QUERY,
          SALES_QUERY,
          PRODUCT_BY_SLUG_QUERY,
          PRODUCT_CATEGORY_QUERY,
-         PRODUCT_THEME_QUERY }
+         PRODUCT_THEME_QUERY,
+         COMMANDERS_QUERY }
