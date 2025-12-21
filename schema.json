@@ -760,6 +760,13 @@
         },
         "optional": true
       },
+      "dimensions": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "discount": {
         "type": "objectAttribute",
         "value": {

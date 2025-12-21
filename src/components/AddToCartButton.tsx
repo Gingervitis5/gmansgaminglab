@@ -33,7 +33,7 @@ const AddToCartButton = ({product, className}: Props) => {
         <Button
         //onClick={handleAddToCart}
             disabled={!isAvailable}
-            className={cn("bg-shop_darkest text-lg text-shop_light_blue shadow-none border border-shop_red font-light tracking-wide hover:text-shop_white hover:border-shop_white hoverEffect", className)}
+            className={cn("bg-shop_darkest text-lg text-shop_light_blue shadow-none border-2 border-shop_red font-light tracking-wide hover:text-shop_white hover:border-shop_white hoverEffect", className)}
         >
             <ShoppingBag /> Add to Cart
         </Button>

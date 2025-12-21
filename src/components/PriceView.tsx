@@ -10,7 +10,7 @@ interface Props{
 
 const PriceView = ({price,discount,className}: Props) => {
   return (
-        <div className={cn("flex items-center gap-2 text-lg", className)}>
+        <div className={cn("flex items-center gap-2", className)}>
             {price && !discount && (
                 <PriceFormatter 
                     amount={price}

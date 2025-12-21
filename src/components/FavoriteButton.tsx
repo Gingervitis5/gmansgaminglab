@@ -27,8 +27,8 @@ const FavoriteButton = ({
         </Link> 
         ) : (
         <button className="group relative hover:border-shop_white  hoverEffect 
-        border-2 border-shop_light_blue p-1.5 rounded-sm">
-          <Heart className={cn(`text-shop_light_blue group hoverEffect`, className)}/>
+        border-2 border-shop_red p-1.5 rounded-sm">
+          <Heart className={cn(`text-shop_light_blue hover:text-shop_white group hoverEffect`, className)}/>
         </button> 
         )
     }

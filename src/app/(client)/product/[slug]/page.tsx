@@ -59,7 +59,7 @@ const SingleProductPage = async({
                     </div>
                 </div>
                 <div className="flex gap-3 relative group hover:border-shop_white hoverEffect">
-                    <FavoriteButton showProduct={true} product={product} className="w-5 h-5 hoverEffect" />
+                    <FavoriteButton showProduct={true} product={product} className="w-5 h-5 group hoverEffect" />
                     <AddToCartButton product={product} className="w-full"/>
                 </div>
                 <ProductCharacteristics product={product}/>

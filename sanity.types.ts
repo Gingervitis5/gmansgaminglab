@@ -143,6 +143,7 @@ export type Product = {
   }>;
   description?: string;
   price?: number;
+  dimensions?: string;
   discount?: number;
   categories?: Array<{
     _ref: string;
@@ -547,6 +548,7 @@ export type SALES_QUERY_RESULT = Array<{
   }>;
   description?: string;
   price?: number;
+  dimensions?: string;
   discount?: number;
   categories: Array<string | null> | null;
   themes?: Array<{
@@ -600,6 +602,7 @@ export type PRODUCT_BY_SLUG_QUERY_RESULT = {
   }>;
   description?: string;
   price?: number;
+  dimensions?: string;
   discount?: number;
   categories?: Array<{
     _ref: string;
@@ -636,9 +639,16 @@ export type PRODUCT_THEME_QUERY_RESULT = Array<{
 
 // Source: src\sanity\queries\query.ts
 // Variable: COMMANDERS_QUERY
-// Query: *[_type == "product" && slug.current == "demonic-consultation-playmat"] | order(name asc){    "images": commanders[].asset->url  }
+// Query: *[_type == "product" && slug.current == $slug] | order(name asc){    "images": commanders[].asset->url  }
 export type COMMANDERS_QUERY_RESULT = Array<{
   images: Array<string | null> | null;
+}>;
+
+// Source: src\sanity\queries\query.ts
+// Variable: DIMENSIONS_QUERY
+// Query: *[_type == "product" && slug.current == $slug]{    dimensions  }
+export type DIMENSIONS_QUERY_RESULT = Array<{
+  dimensions: string | null;
 }>;
 
 // Query TypeMap
@@ -651,6 +661,7 @@ declare module "@sanity/client" {
     '*[_type == "product" && slug.current == $slug] | order(name asc) [0]': PRODUCT_BY_SLUG_QUERY_RESULT;
     '*[_type == "product" && slug.current == $slug] | order(name asc){\n    "categoryName": categories[]->title\n  }': PRODUCT_CATEGORY_QUERY_RESULT;
     '*[_type == "product" && slug.current == $slug] | order(name asc){\n    "themeName": themes[]->title\n  }': PRODUCT_THEME_QUERY_RESULT;
-    '*[_type == "product" && slug.current == "demonic-consultation-playmat"] | order(name asc){\n    "images": commanders[].asset->url\n  }': COMMANDERS_QUERY_RESULT;
+    '*[_type == "product" && slug.current == $slug] | order(name asc){\n    "images": commanders[].asset->url\n  }': COMMANDERS_QUERY_RESULT;
+    '*[_type == "product" && slug.current == $slug]{\n    dimensions\n  }': DIMENSIONS_QUERY_RESULT;
   }
 }
