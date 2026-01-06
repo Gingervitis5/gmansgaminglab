@@ -27,7 +27,7 @@ const ShopByCategory = ({categories}:{categories:Category[]}) => {
                     <div className="mt-2 overflow-hidden border-2 border-shop_light_blue
                     hover:border-shop_white hoverEffect w-20 h-20 p-1">
                         <Link 
-                            href={`/category/${category?.slug?.current}`}>
+                            href={{pathname: "/shop", query: {category: category?.slug?.current}}}>
                             <Image 
                                 src={urlFor(category?.image).url()}
                                 alt="categoryImage"

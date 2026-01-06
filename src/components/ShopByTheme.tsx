@@ -22,7 +22,7 @@ const ShopByTheme = async() => {
             {themes?.map((themes)=>(
                 <div key={themes?._id}>
                     <Link 
-                        href={`/theme/${themes?.slug?.current}`}
+                        href={{pathname: "/shop", query: {theme: themes?.slug?.current}}}
                         className="bg-shop_dark flex items-center justify-center w-34 h-34
                                     overflow-hidden"
                     >

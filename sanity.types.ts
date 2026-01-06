@@ -181,6 +181,7 @@ export type Category = {
     };
     media?: unknown;
     hotspot?: SanityImageHotspot;
+    productCount?: number;
     crop?: SanityImageCrop;
     _type: "image";
   };

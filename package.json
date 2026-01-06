@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.36.0",
+    "@heroui/radio": "^2.3.29",
     "@heroui/system": "^2.4.23",
     "@heroui/theme": "^2.4.23",
     "@heroui/tooltip": "^2.2.24",
