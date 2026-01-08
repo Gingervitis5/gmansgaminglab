@@ -17,6 +17,9 @@ const SingleProductPage = async({
     }) => {
     const { slug } = await params;
     const product = await getProductBySlug(slug);
+    if(!product){
+        return notFound();
+    }
     return (
         <Container className="flex flex-col md:flex-row gap-10 py-5">
             {product?.images && 
@@ -63,28 +66,17 @@ const SingleProductPage = async({
                     <AddToCartButton product={product} className="w-full"/>
                 </div>
                 <ProductCharacteristics product={product}/>
-             <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-b-gray-200 py-5-mt-5">
+             <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-b-shop_light_blue py-5-mt-5">
             </div>
             <div className="flex flex-col">
-                <div className="border border-lightColor/25 border-b-0 p-3 flex items-center gap-2.5">
-                    <Truck size={30} className="text-shop_light_blue" />
-                    <div>
-                    <p className="text-base text-shop_light_blue">
-                        Free Delivery
-                    </p>
-                    <p className="text-shop_light_blue underline underline-offset-2">
-                        Enter your Postal code for delivery availability.
-                    </p>
-                    </div>
-                </div>
-                <div className="border border-lightColor/25 p-3 flex items-center gap-2.5">
+                <div className="border border-shop_light_blue p-3 flex items-center gap-2.5">
                     <CornerDownLeft size={30} className="text-shop_light_blue" />
                     <div>
                     <p className="text-base text-shop_light_blue">
                         Return Delivery
                     </p>
                     <p className="text-shop_light_blue ">
-                        Free 30days Delivery Returns.{" "}
+                        Free 30 days Delivery Returns.{" "}
                         <span className="underline underline-offset-2">Details</span>
                     </p>
                     </div>
