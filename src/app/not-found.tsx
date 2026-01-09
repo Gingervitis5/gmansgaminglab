@@ -10,7 +10,7 @@ const NotFoundPage = () => {
           <Logo />
 
           <h2 className="mt-6 text-3xl font-extrabold text-shop_light_blue">
-            Looking for something?
+            You appear to be lost, traveler.
           </h2>
           <p className="mt-2 text-sm text-shop_light_blue">
             We&apos;re sorry, but the web address you entered is not a functioning

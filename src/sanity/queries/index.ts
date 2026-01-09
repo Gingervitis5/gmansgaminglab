@@ -1,5 +1,5 @@
 import { sanityFetch } from "../lib/live";
-import { BLOG_QUERY, THEMES_QUERY, SALES_QUERY, PRODUCT_BY_SLUG_QUERY, PRODUCT_CATEGORY_QUERY, PRODUCT_THEME_QUERY, COMMANDERS_QUERY, DIMENSIONS_QUERY } from "./query";
+import { BLOG_QUERY, THEMES_QUERY, SALES_QUERY, PRODUCT_BY_SLUG_QUERY, PRODUCT_CATEGORY_QUERY, PRODUCT_THEME_QUERY, COMMANDERS_QUERY, DIMENSIONS_QUERY, GET_ALL_BLOG, BLOG_CATEGORIES, OTHERS_BLOG_QUERY, SINGLE_BLOG_QUERY } from "./query";
 
 export const getCategories = async(quantity?: number) => {
     try{
@@ -39,6 +39,57 @@ export const getLatestBlogs = async() => {
       return [];
   }
 }
+
+export const getAllBlogs = async (quantity: number) => {
+  try {
+    const { data } = await sanityFetch({
+      query: GET_ALL_BLOG,
+      params: { quantity },
+    });
+    return data ?? [];
+  } catch (error) {
+    console.log("Error fetching all brands:", error);
+    return [];
+  }
+};
+
+export const getBlogCategories = async () => {
+  try {
+    const { data } = await sanityFetch({
+      query: BLOG_CATEGORIES,
+    });
+    return data ?? [];
+  } catch (error) {
+    console.log("Error fetching all brands:", error);
+    return [];
+  }
+};
+
+export const getSingleBlog = async (slug: string) => {
+  try {
+    const { data } = await sanityFetch({
+      query: SINGLE_BLOG_QUERY,
+      params: { slug },
+    });
+    return data ?? [];
+  } catch (error) {
+    console.log("Error fetching all brands:", error);
+    return [];
+  }
+};
+
+export const getOthersBlog = async (slug: string, quantity: number) => {
+  try {
+    const { data } = await sanityFetch({
+      query: OTHERS_BLOG_QUERY,
+      params: { slug, quantity },
+    });
+    return data ?? [];
+  } catch (error) {
+    console.log("Error fetching all brands:", error);
+    return [];
+  }
+};
 
 export const getAllSales = async() => {
   try{

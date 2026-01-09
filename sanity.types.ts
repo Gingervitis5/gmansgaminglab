@@ -181,7 +181,6 @@ export type Category = {
     };
     media?: unknown;
     hotspot?: SanityImageHotspot;
-    productCount?: number;
     crop?: SanityImageCrop;
     _type: "image";
   };
@@ -506,8 +505,144 @@ export type BLOG_QUERY_RESULT = Array<{
     title: string | null;
   }> | null;
   publishedAt?: string;
+  isLatest: true;
+  body?: BlockContent;
+}>;
+
+// Source: src\sanity\queries\query.ts
+// Variable: GET_ALL_BLOG
+// Query: *[_type == 'blog'] | order(publishedAt desc)[0...$quantity]{  ...,       blogcategories[]->{    title}    }
+export type GET_ALL_BLOG_RESULT = Array<{
+  _id: string;
+  _type: "blog";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  author?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "author";
+  };
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  blogcategories: Array<{
+    title: string | null;
+  }> | null;
+  publishedAt?: string;
   isLatest?: boolean;
   body?: BlockContent;
+}>;
+
+// Source: src\sanity\queries\query.ts
+// Variable: SINGLE_BLOG_QUERY
+// Query: *[_type == "blog" && slug.current == $slug][0]{  ...,     author->{    name,    image,  },  blogcategories[]->{    title,    "slug": slug.current,  },}
+export type SINGLE_BLOG_QUERY_RESULT = {
+  _id: string;
+  _type: "blog";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  author: {
+    name: string | null;
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  blogcategories: Array<{
+    title: string | null;
+    slug: string | null;
+  }> | null;
+  publishedAt?: string;
+  isLatest?: boolean;
+  body?: BlockContent;
+} | null;
+
+// Source: src\sanity\queries\query.ts
+// Variable: BLOG_CATEGORIES
+// Query: *[_type == "blog"]{     blogcategories[]->{    ...    }  }
+export type BLOG_CATEGORIES_RESULT = Array<{
+  blogcategories: Array<{
+    _id: string;
+    _type: "blogcategory";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    slug?: Slug;
+    description?: string;
+  }> | null;
+}>;
+
+// Source: src\sanity\queries\query.ts
+// Variable: OTHERS_BLOG_QUERY
+// Query: *[  _type == "blog"  && defined(slug.current)  && slug.current != $slug]|order(publishedAt desc)[0...$quantity]{...  publishedAt,  title,  mainImage,  slug,  author->{    name,    image,  },  categories[]->{    title,    "slug": slug.current,  }}
+export type OTHERS_BLOG_QUERY_RESULT = Array<{
+  title: string | null;
+  mainImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  slug: Slug | null;
+  author: {
+    name: string | null;
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+  categories: null;
 }>;
 
 // Source: src\sanity\queries\query.ts
@@ -559,7 +694,7 @@ export type SALES_QUERY_RESULT = Array<{
     _key: string;
     [internalGroqTypeReferenceTo]?: "theme";
   }>;
-  status?: "hot" | "new" | "sale" | "unavailable";
+  status: "sale";
   variant?: "maps" | "playmats";
   isFeatured?: boolean;
 }>;
@@ -658,6 +793,10 @@ declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "theme"] | order(title asc)': THEMES_QUERY_RESULT;
     '*[_type == "blog" && isLatest == true] | order(publishedAt desc) {\n  ...,\n  blogcategories[]->{\n    title\n  }\n}': BLOG_QUERY_RESULT;
+    "*[_type == 'blog'] | order(publishedAt desc)[0...$quantity]{\n  ...,  \n     blogcategories[]->{\n    title\n}\n    }\n  ": GET_ALL_BLOG_RESULT;
+    '*[_type == "blog" && slug.current == $slug][0]{\n  ..., \n    author->{\n    name,\n    image,\n  },\n  blogcategories[]->{\n    title,\n    "slug": slug.current,\n  },\n}': SINGLE_BLOG_QUERY_RESULT;
+    '*[_type == "blog"]{\n     blogcategories[]->{\n    ...\n    }\n  }': BLOG_CATEGORIES_RESULT;
+    '*[\n  _type == "blog"\n  && defined(slug.current)\n  && slug.current != $slug\n]|order(publishedAt desc)[0...$quantity]{\n...\n  publishedAt,\n  title,\n  mainImage,\n  slug,\n  author->{\n    name,\n    image,\n  },\n  categories[]->{\n    title,\n    "slug": slug.current,\n  }\n}': OTHERS_BLOG_QUERY_RESULT;
     '*[_type == "product" && status == "sale"] | order(name asc){\n    ..., "categories": categories[]->title\n  }': SALES_QUERY_RESULT;
     '*[_type == "product" && slug.current == $slug] | order(name asc) [0]': PRODUCT_BY_SLUG_QUERY_RESULT;
     '*[_type == "product" && slug.current == $slug] | order(name asc){\n    "categoryName": categories[]->title\n  }': PRODUCT_CATEGORY_QUERY_RESULT;

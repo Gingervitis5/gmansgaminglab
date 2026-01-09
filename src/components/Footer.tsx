@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { Text } from 'lucide-react';
 import { SubText, SubTitle } from './ui/text';
 import { categoriesData, quickLinksData, themesData } from '@/constants/data';
+import { Input } from './ui/input';
+import { Button } from './ui/button';
 
 const Footer = () => {
   return (
@@ -43,8 +45,23 @@ const Footer = () => {
                     </li>
                   ))}
               </ul>
+              </div>
+              <div className="space-y-4">
+                <SubTitle>Newsletter</SubTitle>
+                <SubText>
+                  Subscribe to our newsletter to receive updates and exclusive
+                  offers
+                </SubText>
+                <form className="space-y-3 text-shop_light_blue">
+                  <Input placeholder="Enter your email" type="email" required className="text-shop_light_blue border-2 border-shop_light_blue"/>
+                  <Button 
+                    className="w-full text-shop_light_blue border-2 border-shop_red hover:border-shop_white hover:text-shop_white"
+                    >
+                      Subscribe
+                    </Button>
+                </form>
+              </div>
             </div>
-          </div>
           <div>
             <p className="py-6 border-t-2 border-shop_light_blue text-center text-sm font-poppins font-light text-shop_light_blue">
               © {new Date().getFullYear()}{" "}
