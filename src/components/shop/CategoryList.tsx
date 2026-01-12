@@ -23,11 +23,6 @@ const CategoryList = ({categories, selectedCategory, setSelectedCategory} : Prop
                         setSelectedCategory(category?.slug?.current as string)
                     }}
                 >
-                    <Radio 
-                        value={category?.slug?.current as string}
-                        id={category?.slug?.current}
-                        className="rounded-sm"
-                        size="xs"/>
                     <Label 
                         htmlFor={category?.slug?.current}
                         className={`${selectedCategory === category?.slug?.current ? 

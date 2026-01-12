@@ -7,6 +7,7 @@ import { useStore } from "../../store";
 import toast from "react-hot-toast";
 import PriceFormatter from "./PriceFormatter";
 import QuantityButton from "./QuantityButton";
+import PriceView from "./PriceView";
 
 interface Props {
     product?: Product;
@@ -44,7 +45,10 @@ const AddToCartButton = ({product, className}: Props) => {
             </div>
             <div className="flex items-center justify-between">
               <span>Subtotal:</span>
-              <PriceFormatter amount={product?.price ? product?.price * itemCount : 0}/>
+              <PriceView 
+                price={product?.price ? product?.price * itemCount : 0}
+                discount={product?.discount ? product?.discount : undefined}
+              />
             </div>
           </div>
         ) : (

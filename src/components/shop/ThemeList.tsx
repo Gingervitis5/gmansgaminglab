@@ -24,10 +24,6 @@ const ThemeList = ({themes, selectedTheme, setSelectedTheme}: Props) => {
                         setSelectedTheme(theme?.slug?.current as string)
                     }}
                 >
-                    <Radio 
-                        value={theme?.slug?.current as string}
-                        id={theme?.slug?.current}
-                        className="rounded-sm " size="xs"/>
                     <Label 
                         htmlFor={theme?.slug?.current}
                         className={`${selectedTheme === theme?.slug?.current ? 

@@ -26,42 +26,28 @@ export default function EmptyCart() {
           className="relative w-48 h-48 mx-auto"
         >
           <Image
-            src="/images/Headshot.png" 
+            src="/images/pixel_icons/EmptyChest.png" 
             alt="Empty shopping cart"
             layout="fill"
             objectFit="contain"
-            className="drop-shadow-lg"
+            className=""
           />
-          <motion.div
-            animate={{
-              x: [0, -10, 10, 0],
-              y: [0, -5, 5, 0],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 3,
-              ease: "linear",
-            }}
-            className="absolute -top-4 -right-4 bg-blue-500 rounded-full p-2"
-          >
-            <ShoppingCart size={24} className="text-white" />
-          </motion.div>
         </motion.div>
 
         <div className="text-center space-y-4">
           <h2 className="text-3xl text-shop_light_blue font-extralight">
-            Your cart is empty
+            Your treasure chest is empty
           </h2>
-          <p className="text-shop_light_blue font-extralight text-lg tracking-normal">
+          <p className="text-shop_light_blue font-extralight text-xl tracking-wide">
             It looks like you haven&apos;t added anything to your cart yet.
-            Let&apos;s change that and find some amazing products for you!
+            Browse the lab and find something that catches your eye!
           </p>
         </div>
 
         <div>
           <Link
             href="/"
-            className="block font-extralight text-lg text-shop_light_blue bg-shop_darkest border-2 border-shop_red text-center 
+            className="block font-extralight text-2xl text-shop_light_blue bg-shop_darkest border-2 border-shop_red text-center 
             py-2.5 rounded-full tracking-wider hover:border-shop_white hover:text-white hoverEffect"
           >
             Browse Products

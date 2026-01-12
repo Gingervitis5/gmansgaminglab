@@ -21,6 +21,7 @@ import { client } from '@/sanity/lib/client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {RadioGroup, Radio} from "@heroui/radio";
 import { Label } from '@/components/ui/label';
+import PriceView from '@/components/PriceView';
 
 const CartPage = () => {
   const {
@@ -119,8 +120,9 @@ const CartPage = () => {
                                 }
                               </div>
                               <div className="flex flex-col items-start justify-between p-0.5 md:p-1">
-                                <PriceFormatter 
-                                  amount={(product?.price as number) * itemCount}
+                                <PriceView 
+                                  price={(product?.price as number)  * itemCount}
+                                  discount={product?.discount ? product?.discount as number : undefined}
                                   className="text-2xl"
                                 />
                                 <QuantityButton 
@@ -162,15 +164,15 @@ const CartPage = () => {
                       <div className="space-y-4">
                         <div className="text-2xl flex items-center justify-between">
                           <span >Subtotal:{" "}</span>
-                          <PriceFormatter amount={getSubTotalPrice()}/>
+                          <PriceFormatter amount={getTotalPrice()}/>
                         </div>
                         <div className="text-2xl flex items-center justify-between">
                           <span >Discount:{" "}</span>
-                          <PriceFormatter amount={getSubTotalPrice()-getTotalPrice()}/>
+                          <PriceFormatter amount={getTotalPrice()-getSubTotalPrice()}/>
                         </div>
                          <div className="border-t-2 border-shop_light_blue text-3xl flex items-center justify-between">
                           <span >Total:{" "}</span>
-                          <PriceFormatter amount={getTotalPrice()}/>
+                          <PriceFormatter amount={getSubTotalPrice()}/>
                         </div>
                         <Button
                           className="text-shop_light_blue text-xl bg-shop_darkest w-full rounded-full tracking-wide
