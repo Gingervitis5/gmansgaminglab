@@ -122,17 +122,21 @@ const WishListProducts = () => {
           </div>
           <div className="flex items-center gap-2">
             {visibleProducts < favoriteProduct?.length && (
-              <div className="my-5">
-                <Button variant="outline" onClick={loadMore}>
+              <div className="my-5 text-shop_light_blue">
+                <Button 
+                  variant="outline"
+                  onClick={loadMore}
+                  className="bg-shop_darkest border-2 border-shop_red">
                   Load More
                 </Button>
               </div>
             )}
             {visibleProducts > 10 && (
-              <div className="my-5">
+              <div className="my-5 text-shop_light_blue">
                 <Button
                   onClick={() => setVisibleProducts(10)}
                   variant="outline"
+                  className="bg-shop_darkest border-2 border-shop_red"
                 >
                   Load Less
                 </Button>
@@ -142,7 +146,7 @@ const WishListProducts = () => {
           {favoriteProduct?.length > 0 && (
             <Button
               onClick={handleResetWishlist}
-              className="mb-5 font-extralight text-xl text-shop_light_blue bg-shop_darkest hover:text-shop_white"
+              className="mb-5 mt-5 font-extralight text-xl text-shop_light_blue bg-shop_darkest hover:text-shop_white"
               variant="destructive"
               size="lg"
             >

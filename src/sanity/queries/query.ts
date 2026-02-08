@@ -69,7 +69,9 @@ const SALES_QUERY = defineQuery(
 );
 
 const PRODUCT_BY_SLUG_QUERY = defineQuery(
-  `*[_type == "product" && slug.current == $slug] | order(name asc) [0]`
+  `*[_type == "product" && slug.current == $slug] | order(name asc) [0]{
+    ..., "categories":categories[]->title
+  }`
 );
 
 const PRODUCT_CATEGORY_QUERY = defineQuery(
