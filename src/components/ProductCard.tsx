@@ -93,7 +93,7 @@ const ProductCard = ({product}: {product: Product}) => {
         <PriceView 
             price={product?.price}
             discount={product.discount}
-            className="pl-2"
+            className="pl-2 text-xl font-extralight"
         />
         <div className="pl-2 flex items-center">
             {product?.status === "unavailable" && 

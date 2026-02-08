@@ -31,12 +31,6 @@ export const productType = defineType({
             of: [{type: "image", options: {hotspot: true}}],
         }),
         defineField({
-            name: "commanders",
-            title: "Recommended Commanders",
-            type: "array",
-            of: [{type: "image", options: {hotspot: true}}],
-        }),
-        defineField({
             name: "description",
             title: "Description",
             type: "string"

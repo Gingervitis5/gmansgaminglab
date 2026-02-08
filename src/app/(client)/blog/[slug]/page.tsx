@@ -14,6 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
+import { Blog } from "../../../../../sanity.types";
 
 const SingleBlogPage = async ({
   params,

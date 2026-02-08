@@ -128,19 +128,6 @@ export type Product = {
     _type: "image";
     _key: string;
   }>;
-  commanders?: Array<{
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-    _key: string;
-  }>;
   description?: string;
   price?: number;
   dimensions?: string;
@@ -669,19 +656,6 @@ export type SALES_QUERY_RESULT = Array<{
     _type: "image";
     _key: string;
   }>;
-  commanders?: Array<{
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-    _key: string;
-  }>;
   description?: string;
   price?: number;
   dimensions?: string;
@@ -711,19 +685,6 @@ export type PRODUCT_BY_SLUG_QUERY_RESULT = {
   name?: string;
   slug?: Slug;
   images?: Array<{
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-    _key: string;
-  }>;
-  commanders?: Array<{
     asset?: {
       _ref: string;
       _type: "reference";
@@ -777,7 +738,7 @@ export type PRODUCT_THEME_QUERY_RESULT = Array<{
 // Variable: COMMANDERS_QUERY
 // Query: *[_type == "product" && slug.current == $slug] | order(name asc){    "images": commanders[].asset->url  }
 export type COMMANDERS_QUERY_RESULT = Array<{
-  images: Array<string | null> | null;
+  images: null;
 }>;
 
 // Source: src\sanity\queries\query.ts
