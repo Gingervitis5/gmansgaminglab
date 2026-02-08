@@ -55,7 +55,7 @@ const Footer = () => {
                 <form className="space-y-3 text-shop_light_blue">
                   <Input placeholder="Enter your email" type="email" required className="text-shop_light_blue border-2 border-shop_light_blue"/>
                   <Button 
-                    className="w-full text-shop_light_blue border-2 border-shop_red hover:border-shop_white hover:text-shop_white"
+                    className="w-full text-lg text-shop_light_blue border-2 border-shop_red hover:border-shop_white hover:text-shop_white"
                     >
                       Subscribe
                     </Button>
