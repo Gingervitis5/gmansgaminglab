@@ -22,6 +22,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {RadioGroup, Radio} from "@heroui/radio";
 import { Label } from '@/components/ui/label';
 import PriceView from '@/components/PriceView';
+import { EmailAddress } from '@clerk/nextjs/server';
+import { createCheckoutSession, Metadata } from '../../../../actions/createCheckoutSession';
 
 const CartPage = () => {
   const {
@@ -64,6 +66,27 @@ const CartPage = () => {
     if(confirmed){
       resetCart();
       toast.success("Your cart has been cleared.");
+    }
+  };
+  const handleCheckout=async()=>{
+    setLoading(true);
+    try{
+      const metadata:Metadata={
+        orderNumber:crypto.randomUUID(),
+        customerName:user?.fullName ?? "Unknown",
+        customerEmail:user?.emailAddresses[0]?.emailAddress ?? "Unknown",
+        clerkUserId:user?.id,
+        address: selectedAddress
+      }
+      const checkoutUrl=await createCheckoutSession(groupedItems,metadata);
+      console.log("Checkout URL: ", checkoutUrl);
+      //if(checkoutUrl){
+      //  window.location.href = checkoutUrl;
+      //}
+    } catch (error){
+      console.error("Error creating checkout session: ", error);
+    } finally{
+      setLoading(false);
     }
   };
   return (
@@ -178,6 +201,8 @@ const CartPage = () => {
                           className="text-shop_light_blue text-xl bg-shop_darkest w-full rounded-full tracking-wide
                           border-2 border-shop_red hover:text-shop_white hover:border-shop_white hoverEffect"
                           size="lg"
+                          disabled={loading}
+                          onClick={handleCheckout}
                         >
                           {loading ? "Please wait..." : "Proceed to Checkout"}
                         </Button>
@@ -252,7 +277,7 @@ const CartPage = () => {
                           border-2 border-shop_red hover:text-shop_white hover:border-shop_white hoverEffect"
                         size="lg"
                         disabled={loading}
-                        //onClick={handleCheckout}
+                        onClick={handleCheckout}
                       >
                         {loading ? "Please wait..." : "Proceed to Checkout"}
                       </Button>
