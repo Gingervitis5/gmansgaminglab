@@ -80,9 +80,9 @@ const CartPage = () => {
       }
       const checkoutUrl=await createCheckoutSession(groupedItems,metadata);
       console.log("Checkout URL: ", checkoutUrl);
-      //if(checkoutUrl){
-      //  window.location.href = checkoutUrl;
-      //}
+      if(checkoutUrl){
+        window.location.href = checkoutUrl;
+      }
     } catch (error){
       console.error("Error creating checkout session: ", error);
     } finally{
