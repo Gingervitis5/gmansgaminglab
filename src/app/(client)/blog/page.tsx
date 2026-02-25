@@ -17,7 +17,7 @@ const BlogPage = async () => {
         <Title>Blogs</Title>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5 md:mt-10">
           {blogs?.map((blog) => (
-            <div key={blog?._id} className="overflow-hidden group">
+            <div key={blog?._id} className="overflow-hidden group border-shop_light_blue border-2 rounded-md">
               {blog?.mainImage && (
                 <Image
                   src={urlFor(blog?.mainImage).url()}

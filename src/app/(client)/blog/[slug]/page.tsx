@@ -1,6 +1,6 @@
 import Container from "@/components/Container";
 import { Title } from "@/components/ui/text";
-import { SINGLE_BLOG_QUERY_RESULT, OTHERS_BLOG_QUERY_RESULT } from "../../../../../sanity.types";
+import { SINGLE_BLOG_QUERY_RESULT, OTHERS_BLOG_QUERY_RESULT, BLOG_CATEGORIES_RESULT } from "../../../../../sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import {
   getBlogCategories,
@@ -35,7 +35,7 @@ const SingleBlogPage = async ({
               alt={blog.title || "Blog Image"}
               width={800}
               height={800}
-              className="w-full max-h-[500px] object-cover rounded-lg"
+              className="w-full max-h-[500px] object-cover rounded-lg border-3 border-shop_light_blue mb-5"
             />
           )}
           <div>
@@ -193,12 +193,12 @@ const SingleBlogPage = async ({
 };
 
 const BlogLeft = async ({ slug }: { slug: string }) => {
-  const categories = await getBlogCategories();
+  const categories: BLOG_CATEGORIES_RESULT = await getBlogCategories();
   const blogs: OTHERS_BLOG_QUERY_RESULT = await getOthersBlog(slug, 5);
 
   return (
     <div>
-      <div className="border border-shop_light_blue p-5 rounded-md">
+      <div className="border-3 border-shop_light_blue p-5 rounded-md">
         <Title className="text-3xl">Blog Categories</Title>
         <div className="space-y-2 mt-2">
           {categories?.map(({ blogcategories }, index) => (
@@ -212,7 +212,7 @@ const BlogLeft = async ({ slug }: { slug: string }) => {
           ))}
         </div>
       </div>
-      <div className="border border-shop_light_blue p-5 rounded-md mt-10">
+      <div className="border-3 border-shop_light_blue p-5 rounded-md mt-10">
         <Title className="text-3xl">Latest Blogs</Title>
         <div className="space-y-4 mt-4">
           {blogs?.map((blog: Blog, index: number) => (
