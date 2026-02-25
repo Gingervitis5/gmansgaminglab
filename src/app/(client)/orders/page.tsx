@@ -26,7 +26,7 @@ const OrdersPage = async() => {
                 <Card
                     className="w-full bg-shop_darkest border-none rounded-md">
                     <CardTitle
-                        className="bg-shop_darkest text-shop_light_blue text-4xl font-light mb-4">
+                        className="px-10 bg-shop_darkest text-shop_light_blue text-4xl font-light mb-4">
                         Order List
                     </CardTitle>
                     <CardContent>
