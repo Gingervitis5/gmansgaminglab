@@ -1,5 +1,5 @@
 import { sanityFetch } from "../lib/live";
-import { BLOG_QUERY, THEMES_QUERY, SALES_QUERY, PRODUCT_BY_SLUG_QUERY, PRODUCT_CATEGORY_QUERY, PRODUCT_THEME_QUERY, COMMANDERS_QUERY, DIMENSIONS_QUERY, GET_ALL_BLOG, BLOG_CATEGORIES, OTHERS_BLOG_QUERY, SINGLE_BLOG_QUERY } from "./query";
+import { BLOG_QUERY, THEMES_QUERY, SALES_QUERY, PRODUCT_BY_SLUG_QUERY, PRODUCT_CATEGORY_QUERY, PRODUCT_THEME_QUERY, COMMANDERS_QUERY, DIMENSIONS_QUERY, GET_ALL_BLOG, BLOG_CATEGORIES, OTHERS_BLOG_QUERY, SINGLE_BLOG_QUERY, MY_ORDERS_QUERY } from "./query";
 
 export const getCategories = async(quantity?: number) => {
     try{
@@ -172,6 +172,19 @@ export const getDimensionInfo = async (slug: string) => {
     return product?.data || null;
   }catch(error){
     console.error("Error fetching product dimension info by slug: ", error);
+    return null;
+  }
+}
+
+export const getMyOrders = async (userId: string) => {
+  try {
+    const orders = await sanityFetch({
+      query: MY_ORDERS_QUERY,
+      params: { userId },
+    });
+    return orders?.data || [];
+  } catch (error) {
+    console.error("Error fetching my orders: ", error);
     return null;
   }
 }

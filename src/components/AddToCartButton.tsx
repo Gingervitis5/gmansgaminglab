@@ -17,10 +17,11 @@ interface Props {
 const AddToCartButton = ({product, className}: Props) => {
 
  const { addItem,getItemCount } = useStore();
- const itemCount=getItemCount(product?._id);
- const isAvailable = product?.status !== "unavailable";
+ const itemCount = product && product._id ? getItemCount(product._id) : 0;
+ const isAvailable = !!product && product.status !== "unavailable";
 
  const handleAddToCart = () => {
+    if (!product) return;
     if (isAvailable && itemCount < 99) {
       addItem(product);
       toast.success(
@@ -41,7 +42,7 @@ const AddToCartButton = ({product, className}: Props) => {
           <div className="text-shop_light_blue tracking-wider w-full">
             <div className="flex items-center justify-between">
               <span>Quantity</span>
-              <QuantityButton product={product} />
+                <QuantityButton product={product!} />
             </div>
             <div className="flex items-center justify-between">
               <span>Subtotal:</span>

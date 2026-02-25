@@ -1,6 +1,6 @@
 import Container from "@/components/Container";
 import { Title } from "@/components/ui/text";
-import { SINGLE_BLOG_QUERY_RESULT } from "../../../../../sanity.types";
+import { SINGLE_BLOG_QUERY_RESULT, OTHERS_BLOG_QUERY_RESULT } from "../../../../../sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import {
   getBlogCategories,
@@ -194,7 +194,7 @@ const SingleBlogPage = async ({
 
 const BlogLeft = async ({ slug }: { slug: string }) => {
   const categories = await getBlogCategories();
-  const blogs = await getOthersBlog(slug, 5);
+  const blogs: OTHERS_BLOG_QUERY_RESULT = await getOthersBlog(slug, 5);
 
   return (
     <div>
@@ -225,12 +225,12 @@ const BlogLeft = async ({ slug }: { slug: string }) => {
                 <Image
                   src={urlFor(blog?.mainImage).url()}
                   alt="blogImage"
-                  width={150}
-                  height={150}
-                  className="w-20 h-20 rounded-full object-cover border-2 border-shop_light_blue group-hover:border-shop_dark_green hoverEffect"
+                  width={100}
+                  height={100}
+                  className="w-16 h-16 rounded-full object-cover border border-shop_light_blue group-hover:border-shop_white hoverEffect"
                 />
               )}
-              <p className="line-clamp-2 text-2xl text-shop_light_blue group-hover:text-shop_dark_green hoverEffect">
+              <p className="line-clamp-2 text-lg text-shop_light_blue group-hover:text-shop_white hoverEffect">
                 {blog?.title}
               </p>
             </Link>

@@ -98,6 +98,13 @@ const DIMENSIONS_QUERY = defineQuery(
   }`
 );
 
+const MY_ORDERS_QUERY = defineQuery(`
+  *[_type == 'order' && clerkUserId == $userId] | order(orderData desc){
+    ...,products[]{
+      ...,product->
+    }
+  }`);
+
 export { THEMES_QUERY,
          BLOG_QUERY,
          SALES_QUERY,
@@ -109,4 +116,5 @@ export { THEMES_QUERY,
          GET_ALL_BLOG,
          SINGLE_BLOG_QUERY,
          BLOG_CATEGORIES,
-         OTHERS_BLOG_QUERY }
+         OTHERS_BLOG_QUERY,
+         MY_ORDERS_QUERY }

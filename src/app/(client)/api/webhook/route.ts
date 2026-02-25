@@ -138,7 +138,7 @@ async function createOrderInSanity(
 
   try {
     const order = await backendClient.create(orderDoc);
-    console.log("createOrderInSanity: created order in Sanity", order && (order._id || order.id) || order);
+    console.log("createOrderInSanity: created order in Sanity", order && (order._id) || order);
     return order;
   } catch (error) {
     console.error("createOrderInSanity: error creating order in Sanity", error, { orderDoc });

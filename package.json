@@ -10,6 +10,7 @@
     "typegen": "npx sanity@latest schema extract && npx sanity@latest typegen generate"
   },
   "dependencies": {
+    "@base-ui/react": "^1.2.0",
     "@clerk/nextjs": "^6.36.0",
     "@heroui/radio": "^2.3.29",
     "@heroui/system": "^2.4.23",
@@ -20,6 +21,7 @@
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-tooltip": "^1.2.8",
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^4.20.3",
     "class-variance-authority": "^0.7.1",

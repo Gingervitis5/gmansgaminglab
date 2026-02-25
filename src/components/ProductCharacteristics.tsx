@@ -16,6 +16,10 @@ const ProductCharacteristics = async(
     const themeInfo = await getProductThemeInfo(product?.slug?.current as string);
     const dimInfo = await getDimensionInfo(product?.slug?.current as string);
     console.log("DimInfo: ", dimInfo);
+    const categories = catInfo?.[0]?.categoryName ?? [];
+    const themes = themeInfo?.[0]?.themeName ?? [];
+    const dimensions = dimInfo?.[0]?.dimensions ?? "";
+
     return (
         <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
@@ -24,21 +28,21 @@ const ProductCharacteristics = async(
                 </AccordionTrigger>
                 <AccordionContent>
                     <div className="flex items-center text-2xl text-shop_light_blue">
-                        Categories:{catInfo && catInfo[0]?.categoryName?.map((key, index:number)=>(
+                        Categories:{categories.map((key: string | null, index:number)=>(
                             <span className="ml-1 mr-1" key={index}>
-                                {index === catInfo[0]?.categoryName.length-1 ? key : key + ", "}
+                                {index === categories.length-1 ? (key ?? "") : (key ?? "") + ", "}
                             </span>
                         ))}
                     </div>
                     <div className="flex items-center text-2xl text-shop_light_blue">
-                        Themes:{themeInfo && themeInfo[0]?.themeName?.map((key:string, index:number)=>(
+                        Themes:{themes.map((key: string | null, index:number)=>(
                             <span className="ml-1 mr-1" key={index}>
-                                {index === themeInfo[0]?.themeName?.length-1 ? key : key + ", "}
+                                {index === themes.length-1 ? (key ?? "") : (key ?? "") + ", "}
                             </span>
                         ))}
                     </div>
                     <div className="flex items-center text-2xl text-shop_light_blue">
-                        Dimensions:{" "}{dimInfo[0]?.dimensions}
+                        Dimensions:{" "}{dimensions}
                     </div>
                 </AccordionContent>
             </AccordionItem>
