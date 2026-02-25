@@ -67,7 +67,7 @@ const OrdersPage = async() => {
                     </CardContent>
                 </Card>
             ) : (
-          <div className="flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center justify-center py-15 px-4 sm:px-6 lg:px-8">
             <FileX className="h-24 w-24 text-gray-400 mb-4" />
             <h2 className="text-3xl font-extralight text-shop_light_blue">
               No orders found
@@ -76,8 +76,12 @@ const OrdersPage = async() => {
               It looks like you haven&apos;t placed any orders yet. Start
               shopping to see your orders here!
             </p>
-            <Button asChild className="mt-6 text-4xl text-shop_light_blue hover:text-shop_white hoverEffect">
-              <Link href="/">Browse Products</Link>
+            <Button asChild className="mt-6 bg-shop_darkest border-2 border-shop_red rounded-full text-3xl text-shop_light_blue hover:text-shop_white hoverEffect">
+              <Link href="/" className="">
+                <div className="px-5">
+                    Browse Products
+                </div>
+              </Link>
             </Button>
           </div>
         )}
