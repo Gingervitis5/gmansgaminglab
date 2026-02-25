@@ -1,0 +1,20 @@
+
+import NoAccess from "@/components/NoAccess";
+import WishListProducts from "@/components/WishlistProducts";
+import { currentUser } from "@clerk/nextjs/server";
+import React from "react";
+
+const WishListPage = async () => {
+  const user = await currentUser();
+  return (
+    <>
+      {user ? (
+        <WishListProducts />
+      ) : (
+        <NoAccess details="Log in to view your wishlist items." />
+      )}
+    </>
+  );
+};
+
+export default WishListPage;
