@@ -62,7 +62,7 @@ const ProductCard = ({product}: {product: Product}) => {
                 )
             }
         </div>
-        <div className="p-2 flex flex-col text-shop_light_blue font-extralight">
+        <div className="pl-2 flex flex-col text-shop_light_blue font-extralight text-lg">
             {product?.categories && 
                 (
                     <p className=" uppercase line-clamp-1">
@@ -73,22 +73,6 @@ const ProductCard = ({product}: {product: Product}) => {
             <Title className="line-clamp-2 text-shop_light_blue text-lg font-jersey font-light group-hover:text-shop_white hoverEffect">
                 {product?.name}
             </Title>
-            <div className="flex items-center gap-2"> 
-                <div className="flex items-center gap-0.5">
-                    {[...Array(5)].map((_, index)=>(
-                        <StarIcon 
-                        size={20}
-                        key={index} 
-                        className={index < 4 ? "text-shop_light_blue" : "text-shop_gray"}
-                        fill={index < 4 ? "#01555D" : "#100F0F"}
-                        />
-                    ))}
-                </div>
-                <p className="text-shop_light_blue tracking-wide">
-                    5 Reviews
-                </p>
-                
-            </div>
         </div>
         <PriceView 
             price={product?.price}
@@ -96,14 +80,14 @@ const ProductCard = ({product}: {product: Product}) => {
             className="pl-2 text-xl font-extralight"
         />
         <div className="pl-2 flex items-center">
-            {product?.status === "unavailable" && 
+            {(product?.status === "unavailable" || product?.status === "coming_soon") && 
                 (
                     <div className="text-center w-36 text-shop_red text-lg font-extralight pt-0.5 pb-0.5 mt-2 mb-2 rounded-full border-2 border-shop_red bg-shop_darkest">
-                        Unavailable
+                        {product.status === "unavailable" ? "Unavailable" : "Coming Soon"}
                     </div>
                 )
             }
-            {product?.status !== "unavailable" && 
+            {(product?.status !== "unavailable" && product?.status !== "coming_soon") && 
                 <AddToCartButton 
                     product={product}
                     className="w-36 rounded-full mt-1 mb-1"

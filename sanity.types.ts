@@ -146,7 +146,7 @@ export type Product = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "theme";
   }>;
-  status?: "new" | "hot" | "sale" | "unavailable";
+  status?: "new" | "hot" | "sale" | "unavailable" | "coming_soon";
   variant?: "playmats" | "maps";
   isFeatured?: boolean;
 };
@@ -709,7 +709,7 @@ export type PRODUCT_BY_SLUG_QUERY_RESULT = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "theme";
   }>;
-  status?: "hot" | "new" | "sale" | "unavailable";
+  status?: "coming_soon" | "hot" | "new" | "sale" | "unavailable";
   variant?: "maps" | "playmats";
   isFeatured?: boolean;
 } | null;
@@ -803,7 +803,7 @@ export type MY_ORDERS_QUERY_RESULT = Array<{
         _key: string;
         [internalGroqTypeReferenceTo]?: "theme";
       }>;
-      status?: "hot" | "new" | "sale" | "unavailable";
+      status?: "coming_soon" | "hot" | "new" | "sale" | "unavailable";
       variant?: "maps" | "playmats";
       isFeatured?: boolean;
     } | null;

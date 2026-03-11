@@ -73,6 +73,7 @@ export const productType = defineType({
                     {title: "Hot", value: "hot"},
                     {title: "Sale", value: "sale"},
                     {title: "Unavailable", value: "unavailable"},
+                    {title: "Coming Soon", value: "coming_soon"},
                 ]
             }
         }),

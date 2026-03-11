@@ -38,7 +38,7 @@ const WishListProducts = () => {
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead className="border-b">
-                <tr className="bg-shop_darker text-shop_light_blue text-xl">
+                <tr className="bg-shop_darker text-shop_light_blue text-3xl">
                   <th className="p-2 text-left font-extralight">Image</th>
                   <th className="p-2 text-left hidden md:table-cell font-extralight">
                     Category
@@ -73,7 +73,7 @@ const WishListProducts = () => {
                               alt={"product image"}
                               width={80}
                               height={80}
-                              className="rounded-md group-hover:scale-105 hoverEffect h-20 w-20 object-contain"
+                              className="rounded-md group-hover:scale-105 hoverEffect h-30 w-30 object-contain"
                             />
                           </Link>
                         )}
@@ -81,16 +81,16 @@ const WishListProducts = () => {
                       </td>
                       <td className="p-2 capitalize hidden md:table-cell text-shop_light_blue">
                         {product?.categories && (
-                          <p className="uppercase line-clamp-1 text-base font-medium">
+                          <p className="uppercase line-clamp-1 text-2xl font-medium">
                             {product?.categories?.map((cat) => cat).join(", ")}
                           </p>
                         )}
                       </td>
-                      <td className="p-2 capitalize hidden md:table-cell text-lg text-shop_light_blue">
+                      <td className="p-2 capitalize hidden md:table-cell text-2xl text-shop_light_blue">
                         {product?.variant}
                       </td>
                       <td
-                        className={`p-2 w-24 
+                        className={`p-2 w-24
                             ${
                                 (product?.status as string) === "unavailable"
                                 ? "text-shop_red"
@@ -101,19 +101,31 @@ const WishListProducts = () => {
                                 ? "text-shop_orange"
                                 : "text-shop_light_blue"
                             } 
-                            font-medium text-lg hidden md:table-cell capitalize`}
+                            font-medium text-2xl hidden md:table-cell capitalize`}
                       >
                         {product?.status}
                       </td>
-                      <td className="p-2 text-lg text-shop_light_blue">
+                      <td className="p-2 text-shop_light_blue">
                         <PriceView
                             price={(product?.price as number)}
                             discount={product?.discount ? product?.discount as number : undefined}
-                            className="text-xl"
+                            className="text-2xl"
                         />
                       </td>
-                      <td className="p-2 text-lg text-shop_light_blue">
-                        <AddToCartButton product={product} className="w-full" />
+                      <td className="p-2 text-2xl text-shop_light_blue flex items-center">
+                        {(product?.status === "unavailable" || product?.status === "coming_soon") && 
+                                (
+                                    <div className="text-center w-full text-shop_red font-extralight pt-0.5 pb-0.5 mt-1 mb-1 rounded-full border-2 border-shop_red bg-shop_darkest">
+                                        {product.status === "unavailable" ? "Unavailable" : "Coming Soon"}
+                                    </div>
+                                )
+                            }
+                        {(product?.status !== "unavailable" && product?.status !== "coming_soon") && 
+                            <AddToCartButton 
+                                product={product}
+                                className="w-full rounded-full mt-1 mb-1"
+                            />
+                        }
                       </td>
                     </tr>
                   ))}
