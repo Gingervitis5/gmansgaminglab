@@ -44,6 +44,9 @@ const ProductCharacteristics = async(
                     <div className="flex items-center text-2xl text-shop_light_blue">
                         Dimensions:{" "}{dimensions}
                     </div>
+                    <div className="flex items-center text-2xl text-shop_light_blue">
+                        The watermark will be removed from the final image.
+                    </div>
                 </AccordionContent>
             </AccordionItem>
         </Accordion>

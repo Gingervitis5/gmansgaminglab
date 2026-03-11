@@ -26,11 +26,22 @@ const handleRemoveProduct = () => {
   };
 
   const handleAddToCart = () => {
-    if (itemCount < 2) {
-      addItem(product);
-      toast.success("Increased quantity successfully!");
+    if(product.variant === "playmats"){
+      if (itemCount < 2) {
+        addItem(product);
+        toast.success("Increased quantity successfully!");
+      } else {
+        toast.error("You can't have more than 2 items of this type in your cart.");
+      }
     } else {
-      toast.error("Can't add more 2 items at a time");
+      if (itemCount < 1){
+        addItem(product);
+        toast.success(
+          `${product?.name?.substring(0, 12)}... added successfully!`
+        );
+      } else {
+        toast.error("You can only have 1 item of this type in your cart.");
+      }
     }
   };
 

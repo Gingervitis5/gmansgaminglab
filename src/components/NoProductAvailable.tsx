@@ -43,7 +43,7 @@ const NoProductAvailable = ({
         className="flex items-center space-x-2 text-shop_light_blue"
       >
         <Loader2 className="w-5 h-5 animate-spin" />
-        <span>We&apos;re restocking shortly</span>
+        <span>We&apos;ll add more products shortly!</span>
       </motion.div>
 
       <motion.p

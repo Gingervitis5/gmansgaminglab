@@ -197,7 +197,6 @@ const CartPage = () => {
                           <span >Total:{" "}</span>
                           <PriceFormatter amount={getSubTotalPrice()}/>
                         </div>
-                        <Suspense fallback={<div className="py-5 text-shop_light_blue bg-shop_darker flex items-center justify-center mx-4">Loading...</div>}>
                           <Button
                             className="text-shop_light_blue text-xl bg-shop_darkest w-full rounded-full tracking-wide
                             border-2 border-shop_red hover:text-shop_white hover:border-shop_white hoverEffect"
@@ -207,7 +206,6 @@ const CartPage = () => {
                           >
                             {loading ? "Please wait..." : "Proceed to Checkout"}
                           </Button>
-                        </Suspense>
                       </div>
                     </div>
                     {addresses && 
@@ -274,7 +272,6 @@ const CartPage = () => {
                           className="text-lg font-extralight text-shop_light_blue"
                         />
                       </div>
-                      <Suspense fallback={<div className="py-5 text-shop_light_blue bg-shop_darker flex items-center justify-center mx-4">Loading...</div>}>
                         <Button
                           className="text-shop_light_blue text-xl bg-shop_darkest w-full rounded-full tracking-wide
                             border-2 border-shop_red hover:text-shop_white hover:border-shop_white hoverEffect"
@@ -284,7 +281,6 @@ const CartPage = () => {
                         >
                           {loading ? "Please wait..." : "Proceed to Checkout"}
                         </Button>
-                      </Suspense>
                     </div>
                   </div>
                 </div>
