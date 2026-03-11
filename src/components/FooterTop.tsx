@@ -15,6 +15,12 @@ const data = [
         subtitle: "https://buymeacoffee.com/gmansgaminglab",
         iconSrc: "/images/Coffee.png", // Store only the path
         altText: "Pixel_Coffee"
+    },
+    {
+        title: "Follow us on Instagram",
+        subtitle: "https://instagram.com/gmansgaminglab",
+        iconSrc: "/images/Instagram.png", // Store only the path
+        altText: "Pixel_Instagram"
     }
 ];
 
