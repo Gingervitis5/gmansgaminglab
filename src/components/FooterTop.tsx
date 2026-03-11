@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 // Remove the Image component from the data array
 const data = [
     {
-        title: "Email Us",
+        title: "Email Me!",
         subtitle: "gmansgaminglab@gmail.com",
         iconSrc: "/images/Email_Icon.png", // Store only the path
         altText: "Pixel_Email"
@@ -17,8 +17,8 @@ const data = [
         altText: "Pixel_Coffee"
     },
     {
-        title: "Follow us on Instagram",
-        subtitle: "https://instagram.com/gmansgaminglab",
+        title: "Follow me on Instagram!",
+        subtitle: "https://www.instagram.com/gmansgaminglab/",
         iconSrc: "/images/Instagram.png", // Store only the path
         altText: "Pixel_Instagram"
     }
