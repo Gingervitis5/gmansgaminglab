@@ -26,7 +26,7 @@ export default function EmptyCart() {
           className="relative w-48 h-48 mx-auto"
         >
           <Image
-            src="/images/pixel_icons/EmptyChest.png" 
+            src="/images/pixel_icons/EmptyTreasureChest.png" 
             alt="Empty shopping cart"
             layout="fill"
             objectFit="contain"
