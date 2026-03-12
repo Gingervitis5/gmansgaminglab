@@ -580,6 +580,13 @@
         },
         "optional": true
       },
+      "link": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "images": {
         "type": "objectAttribute",
         "value": {
