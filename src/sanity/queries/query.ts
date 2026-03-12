@@ -86,12 +86,6 @@ const PRODUCT_THEME_QUERY = defineQuery(
   }`
 );
 
-const COMMANDERS_QUERY = defineQuery(
-  `*[_type == "product" && slug.current == $slug] | order(name asc){
-    "images": commanders[].asset->url
-  }`
-);
-
 const DIMENSIONS_QUERY = defineQuery(
   `*[_type == "product" && slug.current == $slug]{
     dimensions
@@ -103,7 +97,14 @@ const MY_ORDERS_QUERY = defineQuery(`
     ...,products[]{
       ...,product->
     }
-  }`);
+  }`
+);
+
+const ADDRESS_QUERY = defineQuery(`
+  *[_type == "address" && email == $email] | order(default desc, name asc){
+  _id, name, address, city, state, zip, default
+}`
+);
 
 export { THEMES_QUERY,
          BLOG_QUERY,
@@ -111,10 +112,10 @@ export { THEMES_QUERY,
          PRODUCT_BY_SLUG_QUERY,
          PRODUCT_CATEGORY_QUERY,
          PRODUCT_THEME_QUERY,
-         COMMANDERS_QUERY,
          DIMENSIONS_QUERY,
          GET_ALL_BLOG,
          SINGLE_BLOG_QUERY,
          BLOG_CATEGORIES,
          OTHERS_BLOG_QUERY,
-         MY_ORDERS_QUERY }
+         MY_ORDERS_QUERY,
+         ADDRESS_QUERY }

@@ -1,6 +1,5 @@
 "use client"
-import { SignIn } from '@clerk/nextjs'
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useStore } from '../../../../store';
 import { useAuth, useUser } from '@clerk/nextjs';
 import { Address } from '../../../../sanity.types';
@@ -18,12 +17,14 @@ import QuantityButton from '@/components/QuantityButton';
 import { Button } from '@/components/ui/button';
 import AddToWishlistButton from '@/components/AddToWishlistButton';
 import { client } from '@/sanity/lib/client';
+import { ADDRESS_QUERY } from '@/sanity/queries/query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import {RadioGroup, Radio} from "@heroui/radio";
+import {RadioGroup} from "@heroui/radio";
 import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 import PriceView from '@/components/PriceView';
-import { EmailAddress } from '@clerk/nextjs/server';
 import { createCheckoutSession, Metadata } from '../../../../actions/createCheckoutSession';
+import { createAddress, NewAddressPayload } from '../../../../actions/createAddress';
 
 const CartPage = () => {
   const {
@@ -38,29 +39,113 @@ const CartPage = () => {
   const groupedItems = useStore((state) => state.getGroupedItems());
   const { isSignedIn } = useAuth();
   const { user } = useUser();
-  const [addresses, setAddresses] = useState<Address[] | null>(null);
+  const [addresses, setAddresses] = useState<Address[]>([]);
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
-  const fetchAddresses=async()=>{
+  const [newAddress, setNewAddress] = useState<NewAddressPayload | null>(null);
+  const [isSavingAddress, setIsSavingAddress] = useState(false);
+  const userEmail = useMemo(
+    () => user?.primaryEmailAddress?.emailAddress ?? user?.emailAddresses?.[0]?.emailAddress ?? null,
+    [user]
+  );
+
+  const startAddAddress = () => {
+    setNewAddress({
+      name: "",
+      address: "",
+      city: "",
+      state: "",
+      zip: "",
+      default: addresses.length === 0,
+    });
+  };
+
+  const handleAddressFieldChange = (
+    field: keyof NewAddressPayload,
+    value: string | boolean
+  ) => {
+    setNewAddress((previous) => {
+      if (!previous) {
+        return previous;
+      }
+
+      return {
+        ...previous,
+        [field]: value,
+      };
+    });
+  };
+
+  const handleCreateAddress = async () => {
+    if (!newAddress || !userEmail) {
+      return;
+    }
+
+    const normalizedState = newAddress.state.trim().toUpperCase();
+    const normalizedZip = newAddress.zip.trim();
+
+    if (!newAddress.name.trim() || !newAddress.address.trim() || !newAddress.city.trim()) {
+      toast.error("Please complete all required address fields.");
+      return;
+    }
+
+    if (normalizedState.length !== 2) {
+      toast.error("State must be a 2-letter code.");
+      return;
+    }
+
+    if (!/^\d{5}(-\d{4})?$/.test(normalizedZip)) {
+      toast.error("ZIP Code must be 12345 or 12345-6789.");
+      return;
+    }
+
+    setIsSavingAddress(true);
+    try {
+      const createdAddress = await createAddress({
+        ...newAddress,
+        state: normalizedState,
+        zip: normalizedZip,
+      });
+
+      await fetchAddresses(userEmail);
+      setSelectedAddress(createdAddress);
+      setNewAddress(null);
+      toast.success("Address added successfully.");
+    } catch (error) {
+      console.error("Error creating address: ", error);
+      toast.error("Unable to add address. Please try again.");
+    } finally {
+      setIsSavingAddress(false);
+    }
+  };
+
+  const fetchAddresses = async (email: string) => {
     setLoading(true);
-    try{
-      const query=`*[_type == "address"] | order(publishedAt desc)`;
-      const data = await client.fetch(query);
+    try {
+      const data = await client.fetch<Address[]>(ADDRESS_QUERY, { email });
       setAddresses(data);
       const defaultAddress = data.find((addr: Address) => addr.default);
       if (defaultAddress) {
         setSelectedAddress(defaultAddress);
       } else if (data.length > 0) {
-        setSelectedAddress(data[0]); // Optional: select first address if no default
+        setSelectedAddress(data[0]);
+      } else {
+        setSelectedAddress(null);
       }
-    } catch(error){
+    } catch (error) {
       console.log("Error fetching addresses: ", error)
     } finally{
       setLoading(false);
     }
   };
-  useEffect(()=>{
-    fetchAddresses();
-  }, [])
+  useEffect(() => {
+    if (!isSignedIn || !userEmail) {
+      setAddresses([]);
+      setSelectedAddress(null);
+      return;
+    }
+
+    fetchAddresses(userEmail);
+  }, [isSignedIn, userEmail]);
   const handleResetCart=()=>{
     const confirmed = window.confirm("Are you sure you want to clear your cart?");
     if(confirmed){
@@ -208,22 +293,23 @@ const CartPage = () => {
                           </Button>
                       </div>
                     </div>
-                    {addresses && 
-                      <div>
+                    <div>
                         <Card className="text-xl bg-shop_darkest rounded-md mt-5 border-0 text-shop_light_blue">
                           <CardHeader>
                             <CardTitle className="font-extralight tracking-wide text-3xl">Select Delivery Address</CardTitle>
                           </CardHeader>
                           <CardContent>
                             <RadioGroup 
-                              defaultValue={addresses
-                                ?.find((addr) => addr.default)
-                                ?._id.toString()}
+                              value={selectedAddress?._id}
+                              onValueChange={(value) => {
+                                const nextSelectedAddress = addresses.find((address) => address._id === value) ?? null;
+                                setSelectedAddress(nextSelectedAddress);
+                              }}
                             >
                               {addresses?.map((address)=>(
                                 <div 
                                   key={address?._id}
-                                  onClick={()=>setSelectedAddress(address)}
+                                  onClick={() => setSelectedAddress(address)}
                                   className={`flex items-center space-x-2 mb-4 cursor-pointer
                                     ${selectedAddress?._id === address?._id && "text-shop_white underline"}`}
                                 >
@@ -240,14 +326,87 @@ const CartPage = () => {
                                 </div>
                               ))}
                             </RadioGroup>
-                            <Button className="w-full mt-4 text-xl text-shop_light_blue bg-shop_darkest border-2
-                            border-shop_red hover:text-shop_white hover:border-shop_white rounded-full">
-                              Add New Address
-                            </Button>
+                            {!addresses.length && (
+                              <p className="text-lg text-shop_light_blue/80 mb-3">
+                                No saved addresses yet. Add one to continue checkout.
+                              </p>
+                            )}
+
+                            {newAddress ? (
+                              <div className="space-y-3 mt-4 text-2xl">
+                                <Input
+                                  value={newAddress.name}
+                                  onChange={(event) => handleAddressFieldChange("name", event.target.value)}
+                                  placeholder="Address Name (Home, Work)"
+                                  className="text-shop_light_blue border-shop_light_blue"
+                                />
+                                <Input
+                                  value={newAddress.address}
+                                  onChange={(event) => handleAddressFieldChange("address", event.target.value)}
+                                  placeholder="Street Address"
+                                  className="text-shop_light_blue border-shop_light_blue"
+                                />
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                  <Input
+                                    value={newAddress.city}
+                                    onChange={(event) => handleAddressFieldChange("city", event.target.value)}
+                                    placeholder="City"
+                                    className="text-shop_light_blue border-shop_light_blue"
+                                  />
+                                  <Input
+                                    value={newAddress.state}
+                                    onChange={(event) => handleAddressFieldChange("state", event.target.value.toUpperCase())}
+                                    placeholder="State (NY)"
+                                    maxLength={2}
+                                    className="text-shop_light_blue border-shop_light_blue"
+                                  />
+                                  <Input
+                                    value={newAddress.zip}
+                                    onChange={(event) => handleAddressFieldChange("zip", event.target.value)}
+                                    placeholder="ZIP"
+                                    className="text-shop_light_blue border-shop_light_blue"
+                                  />
+                                </div>
+
+                                <Label className="flex items-center gap-2 cursor-pointer text-lg">
+                                  <input
+                                    type="checkbox"
+                                    checked={Boolean(newAddress.default)}
+                                    onChange={(event) => handleAddressFieldChange("default", event.target.checked)}
+                                  />
+                                  Set as default
+                                </Label>
+
+                                <div className="grid grid-cols-2 gap-3">
+                                  <Button
+                                    onClick={handleCreateAddress}
+                                    disabled={isSavingAddress}
+                                    className="text-xl text-shop_light_blue bg-shop_darkest border-2 border-shop_red hover:text-shop_white hover:border-shop_white rounded-full"
+                                  >
+                                    {isSavingAddress ? "Saving..." : "Save Address"}
+                                  </Button>
+                                  <Button
+                                    onClick={() => setNewAddress(null)}
+                                    disabled={isSavingAddress}
+                                    variant="outline"
+                                    className="text-xl text-shop_light_blue border-2 border-shop_red rounded-full"
+                                  >
+                                    Cancel
+                                  </Button>
+                                </div>
+                              </div>
+                            ) : (
+                              <Button
+                                onClick={startAddAddress}
+                                className="w-full mt-4 text-xl text-shop_light_blue bg-shop_darkest border-2
+                                border-shop_red hover:text-shop_white hover:border-shop_white rounded-full"
+                              >
+                                Add New Address
+                              </Button>
+                            )}
                           </CardContent>
                         </Card>
                       </div>
-                    }
                   </div>
                 </div>
                 {/* Order summary for mobile view*/}
