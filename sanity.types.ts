@@ -115,6 +115,7 @@ export type Product = {
   _rev: string;
   name?: string;
   slug?: Slug;
+  link?: string;
   images?: Array<{
     asset?: {
       _ref: string;
@@ -643,6 +644,7 @@ export type SALES_QUERY_RESULT = Array<{
   _rev: string;
   name?: string;
   slug?: Slug;
+  link?: string;
   images?: Array<{
     asset?: {
       _ref: string;
@@ -684,6 +686,7 @@ export type PRODUCT_BY_SLUG_QUERY_RESULT = {
   _rev: string;
   name?: string;
   slug?: Slug;
+  link?: string;
   images?: Array<{
     asset?: {
       _ref: string;
@@ -772,6 +775,7 @@ export type MY_ORDERS_QUERY_RESULT = Array<{
       _rev: string;
       name?: string;
       slug?: Slug;
+      link?: string;
       images?: Array<{
         asset?: {
           _ref: string;
