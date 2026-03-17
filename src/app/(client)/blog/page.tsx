@@ -12,9 +12,9 @@ const BlogPage = async () => {
   const blogs = await getAllBlogs(6);
 
   return (
-    <div>
+    <div className="py-10">
       <Container>
-        <Title>Blogs</Title>
+        <Title className="mb-5 underline underline-offset-4 decoration-1 uppercase tracking-wider">Browse all blogs</Title>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5 md:mt-10">
           {blogs?.map((blog) => (
             <div key={blog?._id} className="overflow-hidden group border-shop_light_blue border-2 rounded-md">
