@@ -1,10 +1,11 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { Category, Product, THEMES_QUERY_RESULT } from '../../sanity.types';
+import { Category, Product, THEMES_QUERY_RESULT, VARIANTS_QUERY_RESULT } from '../../sanity.types';
 import Container from './Container';
 import { Title } from './ui/text';
 import CategoryList from './shop/CategoryList';
 import ThemeList from './shop/ThemeList';
+import TypeList from './shop/TypeList';
 import { useSearchParams } from 'next/navigation';
 import { client } from '@/sanity/lib/client';
 import { Loader2 } from 'lucide-react';
@@ -13,17 +14,20 @@ import ProductCard from './ProductCard';
 
 interface Props {
     categories: Category[];
-    themes: THEMES_QUERY_RESULT
+        themes: THEMES_QUERY_RESULT;
+        variants: VARIANTS_QUERY_RESULT;
 }
 
-const Shop = ({categories, themes}: Props) => {
+const Shop = ({categories, themes, variants}: Props) => {
   const searchParams = useSearchParams();
   const categoryParams = searchParams?.get("category");
   const themeParams = searchParams?.get("theme");
+    const variantParams = searchParams?.get("variant");
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(categoryParams || null);
   const [selectedTheme, setSelectedTheme] = useState<string | null>(themeParams || null);
+    const [selectedVariant, setSelectedVariant] = useState<string | null>(variantParams || null);
   const fetchProducts=async()=>{
     setLoading(true);
     try{
@@ -31,11 +35,12 @@ const Shop = ({categories, themes}: Props) => {
         *[_type == 'product' 
         && (!defined($selectedCategory) || references(*[_type == "category" && slug.current == $selectedCategory]._id))
         && (!defined($selectedTheme) || references(*[_type == "theme" && slug.current == $selectedTheme]._id))
+        && (!defined($selectedVariant) || variant == $selectedVariant)
         ] 
         | order(name asc) {
             ...,"categories": categories[]->title
         }`;
-        const data = await client.fetch(query, {selectedCategory, selectedTheme}, { next: {revalidate: 0}});
+        const data = await client.fetch(query, {selectedCategory, selectedTheme, selectedVariant}, { next: {revalidate: 0}});
         setProducts(data);
     } catch(error){
         console.log("Shop product fetching error", error);
@@ -46,7 +51,7 @@ const Shop = ({categories, themes}: Props) => {
   console.log(products);
   useEffect(()=> {
     fetchProducts();
-  }, [selectedCategory, selectedTheme])
+    }, [selectedCategory, selectedTheme, selectedVariant])
   return <div className="">
             <Container className="mt-5">
                 <div className="sticky top-0 z-10 mb-5">
@@ -54,11 +59,13 @@ const Shop = ({categories, themes}: Props) => {
                         <Title className="uppercase tracking-wide">Shop all Products</Title>
                         {(
                             selectedCategory !== null || 
-                            selectedTheme !== null) && (
+                            selectedTheme !== null ||
+                            selectedVariant !== null) && (
                             <button 
                                 onClick={() => {
                                     setSelectedCategory(null)
                                     setSelectedTheme(null)
+                                    setSelectedVariant(null)
                                 }}
                                 className="text-shop_light_blue underline text-lg tracking-wider
                                             hover:text-shop_white hoverEffect"
@@ -80,6 +87,11 @@ const Shop = ({categories, themes}: Props) => {
                             themes={themes}
                             setSelectedTheme={setSelectedTheme}
                             selectedTheme={selectedTheme}
+                        />
+                        <TypeList
+                            variants={variants}
+                            selectedVariant={selectedVariant}
+                            setSelectedVariant={setSelectedVariant}
                         />
                     </div>
                     <div className="flex-1 pt-5">

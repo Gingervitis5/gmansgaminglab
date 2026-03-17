@@ -18,9 +18,9 @@ const Footer = () => {
             <div>
               <div className="inline-flex ml-7">
                 <Image 
-                src="/images/Potion.png" 
+                src="/images/pixel_icons/Sci-Fi_Category_Image.png" 
                 alt="Pixel Tentacle"
-                width={100}
+                width={150}
                 height={100}
                 />
                 <SubText className="text-center text-2xl">Explore the fantastical and visually appealing artworks we have brewed within the Lab. Discover unique creations that ignite your imagination and bring your gaming adventures to life.</SubText>
