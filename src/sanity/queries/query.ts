@@ -2,6 +2,10 @@ import { defineQuery } from "next-sanity";
 
 const THEMES_QUERY = defineQuery(`*[_type == "theme"] | order(title asc)`);
 
+const VARIANTS_QUERY = defineQuery(
+`*[_type == "product"] | order(title asc) {
+  variant
+}`);
 
 const BLOG_QUERY = defineQuery(
 `*[_type == "blog" && isLatest == true] | order(publishedAt desc) {
@@ -107,6 +111,7 @@ const ADDRESS_QUERY = defineQuery(`
 );
 
 export { THEMES_QUERY,
+         VARIANTS_QUERY,
          BLOG_QUERY,
          SALES_QUERY,
          PRODUCT_BY_SLUG_QUERY,
