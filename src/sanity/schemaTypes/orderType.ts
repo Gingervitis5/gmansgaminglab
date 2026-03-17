@@ -148,6 +148,11 @@ export const orderType = defineType({
       type: "datetime",
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: "mapLinksSentAt",
+      title: "Map Links Sent At",
+      type: "datetime",
+    }),
   ],
   preview: {
     select: {
