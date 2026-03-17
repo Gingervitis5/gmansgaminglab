@@ -38,8 +38,7 @@ const SocialMedia = ({className, iconClassName}:Props) => {
                 <Tooltip key={item?.title} content={item?.title} showArrow={true} className={cn("bg-shop_darkest pl-3 pr-3 rounded-2xl font-pixelify border-shop_red border-2", className)}>
                     <div key={item?.title}>
                         <Link
-                            key={item?.title} 
-                            target="_blank"
+                            key={item?.title}
                             rel="noopener noreferrer"
                             href={item?.href} 
                             className={cn("hover:text-shop_white", iconClassName)}>

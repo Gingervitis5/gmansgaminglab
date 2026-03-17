@@ -61,21 +61,7 @@ const SingleProductPage = async({
                     }
                 </div>
                 <ProductCharacteristics product={product}/>
-             <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-b-shop_light_blue py-5-mt-5">
-            </div>
-            <div className="flex flex-col">
-                <div className="border border-shop_light_blue p-3 flex items-center gap-2.5">
-                    <CornerDownLeft size={30} className="text-shop_light_blue" />
-                    <div>
-                    <p className="text-base text-shop_light_blue">
-                        Return Delivery
-                    </p>
-                    <p className="text-shop_light_blue ">
-                        Free 30 days Delivery Returns.{" "}
-                        <span className="underline underline-offset-2">Details</span>
-                    </p>
-                    </div>
-                </div>
+             <div className="flex flex-wrap items-center justify-between border-b border-b-shop_light_blue py-5-mt-5">
             </div>
         </div>
         </Container>

@@ -6,7 +6,7 @@ const ShopPage = async() => {
     const categories = await  getCategories();
     const themes = await getAllThemes();
   return (
-    <div>
+    <div className="py-5">
         <Shop categories={categories} themes={themes}/>
     </div>
   );

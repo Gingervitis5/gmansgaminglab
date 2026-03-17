@@ -23,7 +23,7 @@ const Footer = () => {
                 width={100}
                 height={100}
                 />
-                <SubText className="text-center text-2xl">Explore the fantastical and visually appealing artworks we have brewed within the Lab.</SubText>
+                <SubText className="text-center text-2xl">Explore the fantastical and visually appealing artworks we have brewed within the Lab. Discover unique creations that ignite your imagination and bring your gaming adventures to life.</SubText>
               </div>
               <div className="ml-14">
                 <SocialMedia 
