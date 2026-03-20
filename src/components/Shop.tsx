@@ -43,12 +43,11 @@ const Shop = ({categories, themes, variants}: Props) => {
         const data = await client.fetch(query, {selectedCategory, selectedTheme, selectedVariant}, { next: {revalidate: 0}});
         setProducts(data);
     } catch(error){
-        console.log("Shop product fetching error", error);
+        console.error("Shop product fetching error", error);
     }finally {
         setLoading(false);
     }
   }
-  console.log(products);
   useEffect(()=> {
     fetchProducts();
     }, [selectedCategory, selectedTheme, selectedVariant])

@@ -1,39 +1,59 @@
-import React from "react"
+"use client";
+
+import React, { useEffect, useState } from "react"
 import Container from "@/components/Container"
 import Logo from "./Logo";
 import HeaderMenu from "./HeaderMenu";
 import SearchBar from "./SearchBar";
 import CartIcon from "./CartIcon";
 import FavoriteButton from "./FavoriteButton";
-import SignIn from "./SignIn";
+import SignInComponent from "./SignIn";
 import MobileMenu from "./MobileMenu";
 import { Pixelify_Sans } from 'next/font/google';
-import { auth, currentUser } from "@clerk/nextjs/server";
-import { ClerkLoaded, SignedIn, SignInButton, UserButton } from "@clerk/nextjs";
+import { ClerkLoaded, UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { Logs } from "lucide-react";
-import { getMyOrders } from "@/sanity/queries";
+import { client } from "@/sanity/lib/client";
+import { MY_ORDERS_QUERY } from "@/sanity/queries/query";
 const pixelify = Pixelify_Sans({
     subsets:['cyrillic'],
     weight:['400']
 })
 
-const Header = async() => {
-    let user = null;
-    let userId: string | null = null;
+const Header = () => {
+    const { user, isSignedIn } = useUser();
+    const [ordersCount, setOrdersCount] = useState(0);
 
-    try {
-        user = await currentUser();
-        const authResult = await auth();
-        userId = authResult.userId;
-    } catch (error) {
-        console.log("Header: Clerk auth unavailable, rendering signed-out state", error);
-    }
+    useEffect(() => {
+        const userId = user?.id;
+        if (!isSignedIn || !userId) {
+            setOrdersCount(0);
+            return;
+        }
 
-    let orders = null;
-    if(userId) {
-        orders = await getMyOrders(userId);
-    }
+        let isMounted = true;
+
+        const fetchOrderCount = async () => {
+            try {
+                const orders = await client.fetch<unknown[]>(MY_ORDERS_QUERY, { userId });
+                if (isMounted) {
+                    setOrdersCount(Array.isArray(orders) ? orders.length : 0);
+                }
+            } catch (error) {
+                console.error("Error fetching orders for header:", error);
+                if (isMounted) {
+                    setOrdersCount(0);
+                }
+            }
+        };
+
+        fetchOrderCount();
+
+        return () => {
+            isMounted = false;
+        };
+    }, [isSignedIn, user?.id]);
+
     return (
         <header className="sticky top-0 z-50 bg-shop_dark/95 py-5 border-b-5 border-shop_light_blue backdrop-blur-md">
             <Container className="flex items-center justify-between">
@@ -46,22 +66,20 @@ const Header = async() => {
                     <SearchBar />
                     <CartIcon />
                     <FavoriteButton className="w-7 h-7"/>
-                    {user && (
+                    {isSignedIn && (
                         <Link
                             href="/orders"
                             className="group relative text-shop_light_blue hover:text-shop_white hoverEffect">
                             <Logs />
                             <span className="absolute -top-1 -right-1 bg-shop_red text-white h-4 w-4 
                                             rounded-full text-xs font-light font-poppins flex items-center justify-center">
-                                {orders?.length ? orders?.length : 0}
+                                {ordersCount}
                             </span>
                         </Link>
                     )}
                     <ClerkLoaded>
-                        <SignedIn>
-                            <UserButton />
-                        </SignedIn>
-                        {!user && <SignIn />}
+                        {isSignedIn && <UserButton />}
+                        {!isSignedIn && <SignInComponent />}
                     </ClerkLoaded>
                 </div>
             </Container>
