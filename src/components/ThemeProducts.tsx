@@ -35,7 +35,7 @@ const ThemeProducts = ({themes, slug}: Props) => {
             const data = await client.fetch(query, {themeSlug});
             setProducts(data);
         }catch(error){
-            console.log("Error fetching products: ", error);
+            console.error("Error fetching products: ", error);
             setProducts([]);
         }finally {
             setLoading(false);
