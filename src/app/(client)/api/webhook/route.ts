@@ -148,6 +148,11 @@ async function createOrderInSanity(
     console.log("createOrderInSanity: order already exists for session", id);
   }
 
+  console.debug("Purchased Map Products", {
+    count: purchasedMapProducts.length,
+    products: purchasedMapProducts.map((p) => ({ id: p._id, name: p.name })),
+   });
+
   if (!order?.mapLinksSentAt && purchasedMapProducts.length > 0) {
     if (!deliveryEmail || deliveryEmail === "Unknown") {
       throw new Error(`Missing customer email for map delivery on session ${id}`);
@@ -168,6 +173,13 @@ async function createOrderInSanity(
     console.log("createOrderInSanity: sent purchased map links", {
       stripeCheckoutSessionId: id,
       productCount: purchasedMapProducts.length,
+    });
+  } else {
+    console.log("createOrderInSanity: map link email skipped", {
+      stripeCheckoutSessionId: id,
+      hasOrder: Boolean(order?._id),
+      alreadySent: Boolean(order?.mapLinksSentAt),
+      purchasedMapProducts: purchasedMapProducts.length,
     });
   }
 

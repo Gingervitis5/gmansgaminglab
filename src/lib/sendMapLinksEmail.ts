@@ -12,6 +12,8 @@ type SendMapLinksEmailParams = {
   products: MapLinkProduct[];
 };
 
+const RESEND_TEST_FROM_EMAIL = "onboarding@resend.dev";
+
 function escapeHtml(value: string) {
   return value
     .replace(/&/g, "&amp;")
@@ -19,6 +21,29 @@ function escapeHtml(value: string) {
     .replace(/>/g, "&gt;")
     .replace(/\"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+function isConsumerMailbox(email: string) {
+  return /@(gmail\.com|yahoo\.com|hotmail\.com|outlook\.com|icloud\.com)$/i.test(email);
+}
+
+function resolveFromEmail(orderFromEmail?: string) {
+  const configured = orderFromEmail?.trim();
+
+  if (!configured) {
+    if (process.env.NODE_ENV !== "production") {
+      return RESEND_TEST_FROM_EMAIL;
+    }
+
+    throw new Error("Missing ORDER_FROM_EMAIL");
+  }
+
+  // Resend sender domains must be verified; consumer mailbox domains usually fail.
+  if (isConsumerMailbox(configured) && process.env.NODE_ENV !== "production") {
+    return RESEND_TEST_FROM_EMAIL;
+  }
+
+  return configured;
 }
 
 export async function sendMapLinksEmail({
@@ -34,9 +59,7 @@ export async function sendMapLinksEmail({
     throw new Error("Missing RESEND_API_KEY");
   }
 
-  if (!orderFromEmail) {
-    throw new Error("Missing ORDER_FROM_EMAIL");
-  }
+  const fromEmail = resolveFromEmail(orderFromEmail);
 
   const resend = new Resend(resendApiKey);
   const safeCustomerName = escapeHtml(customerName || "Customer");
@@ -50,8 +73,8 @@ export async function sendMapLinksEmail({
     .map((product) => `- ${product.name}: ${product.link}`)
     .join("\n");
 
-  const { error } = await resend.emails.send({
-    from: orderFromEmail,
+  const { data, error } = await resend.emails.send({
+    from: fromEmail,
     to,
     subject: `Your map links for order ${orderNumber}`,
     html: `
@@ -71,6 +94,14 @@ export async function sendMapLinksEmail({
   });
 
   if (error) {
-    throw new Error(error.message);
+    throw new Error(
+      `Map email failed (from=${fromEmail}, to=${to}): ${error.message}`
+    );
   }
+
+  console.log("sendMapLinksEmail: email sent", {
+    to,
+    from: fromEmail,
+    emailId: data?.id,
+  });
 }
