@@ -7,10 +7,10 @@ import HeaderMenu from "./HeaderMenu";
 import SearchBar from "./SearchBar";
 import CartIcon from "./CartIcon";
 import FavoriteButton from "./FavoriteButton";
-import SignIn from "./SignIn";
+import SignInComponent from "./SignIn";
 import MobileMenu from "./MobileMenu";
 import { Pixelify_Sans } from 'next/font/google';
-import { ClerkLoaded, SignedIn, UserButton, useUser } from "@clerk/nextjs";
+import { ClerkLoaded, UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { Logs } from "lucide-react";
 import { client } from "@/sanity/lib/client";
@@ -78,10 +78,8 @@ const Header = () => {
                         </Link>
                     )}
                     <ClerkLoaded>
-                        <SignedIn>
-                            <UserButton />
-                        </SignedIn>
-                        {!isSignedIn && <SignIn />}
+                        {isSignedIn && <UserButton />}
+                        {!isSignedIn && <SignInComponent />}
                     </ClerkLoaded>
                 </div>
             </Container>
