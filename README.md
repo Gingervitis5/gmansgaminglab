@@ -20,6 +20,19 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Environment Variables
+
+The Stripe webhook and digital map delivery flow require these environment variables:
+
+- `STRIPE_SECRET_KEY`
+- `STRIPE_WEBHOOK_SECRET`
+- `NEXT_PUBLIC_BASE_URL`
+- `SANITY_API_TOKEN`
+- `RESEND_API_KEY`
+- `ORDER_FROM_EMAIL`
+
+`ORDER_FROM_EMAIL` must be a sender address that is verified with your email provider.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

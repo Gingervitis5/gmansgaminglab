@@ -19,8 +19,17 @@ const pixelify = Pixelify_Sans({
 })
 
 const Header = async() => {
-    const user = await currentUser();
-    const {userId} = await auth();
+    let user = null;
+    let userId: string | null = null;
+
+    try {
+        user = await currentUser();
+        const authResult = await auth();
+        userId = authResult.userId;
+    } catch (error) {
+        console.log("Header: Clerk auth unavailable, rendering signed-out state", error);
+    }
+
     let orders = null;
     if(userId) {
         orders = await getMyOrders(userId);

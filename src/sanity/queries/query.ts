@@ -110,6 +110,12 @@ const ADDRESS_QUERY = defineQuery(`
 }`
 );
 
+const GET_EMAIL_QUERY = defineQuery(`
+  *[_type == 'order' && customerEmail == $email] | order(orderDate desc){
+    ...
+  }
+`);
+
 export { THEMES_QUERY,
          VARIANTS_QUERY,
          BLOG_QUERY,
@@ -123,4 +129,5 @@ export { THEMES_QUERY,
          BLOG_CATEGORIES,
          OTHERS_BLOG_QUERY,
          MY_ORDERS_QUERY,
-         ADDRESS_QUERY }
+         ADDRESS_QUERY,
+         GET_EMAIL_QUERY }

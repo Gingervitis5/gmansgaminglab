@@ -163,7 +163,7 @@ const SingleBlogPage = async ({
                             return (
                               <Link
                                 href={value.href}
-                                className="font-medium text-gray-950 underline decoration-gray-400 underline-offset-4 data-[hover]:decoration-gray-600"
+                                className="font-medium text-gray-950 underline decoration-gray-400 underline-offset-4 "
                               >
                                 {children}
                               </Link>

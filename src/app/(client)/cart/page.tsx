@@ -159,11 +159,11 @@ const CartPage = () => {
       const metadata:Metadata={
         orderNumber:crypto.randomUUID(),
         customerName:user?.fullName ?? "Unknown",
-        customerEmail:user?.emailAddresses[0]?.emailAddress ?? "Unknown",
+        customerEmail:user?.primaryEmailAddress?.emailAddress ?? "Unknown",
         clerkUserId:user?.id,
         address: selectedAddress
       }
-      const checkoutUrl=await createCheckoutSession(groupedItems,metadata);
+      const checkoutUrl=await createCheckoutSession(groupedItems,metadata, window.location.origin);
       console.log("Checkout URL: ", checkoutUrl);
       if(checkoutUrl){
         window.location.href = checkoutUrl;

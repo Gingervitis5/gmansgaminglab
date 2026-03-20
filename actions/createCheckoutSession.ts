@@ -21,9 +21,11 @@ export interface GroupedCartItems {
 
 export async function createCheckoutSession(
     items:GroupedCartItems[], 
-    metadata:Metadata
+    metadata:Metadata,
+    requestOrigin?: string
 ) {
     try{
+        const baseUrl = resolveBaseUrl(requestOrigin);
         // Retrieve existing customer or create a new one
         const customers = await stripe.customers.list({
             email: metadata.customerEmail,
@@ -44,14 +46,14 @@ export async function createCheckoutSession(
             invoice_creation:{
                 enabled:true
             },
-            success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`,
-            cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cart`,
+            success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`,
+            cancel_url: `${baseUrl}/cart`,
             line_items: items?.map((item)=>({
                 price_data:{
                     currency:"USD",
-                    unit_amount: Math.round(item?.product?.price! * 100),
+                    unit_amount: Math.round((item?.product?.price ?? 0) * 100),
                     product_data:{
-                        name: item?.product?.name! || "Unknown Product",
+                        name: item?.product?.name || "Unknown Product",
                         description: item?.product?.description,
                         metadata: {id: item?.product?._id},
                         images: item?.product?.images && item?.product?.images?.length > 0 ?
@@ -73,4 +75,18 @@ export async function createCheckoutSession(
         console.error("Failed to create checkout session:", error);
         throw Error("Failed to create checkout session");
     }
+}
+
+function resolveBaseUrl(requestOrigin?: string) {
+    const normalizedOrigin = requestOrigin?.trim().replace(/\/+$/, "");
+    if (normalizedOrigin) {
+        return normalizedOrigin;
+    }
+
+    const configuredBaseUrl = process.env.NEXT_PUBLIC_BASE_URL?.trim().replace(/\/+$/, "");
+    if (configuredBaseUrl) {
+        return configuredBaseUrl;
+    }
+
+    return "http://localhost:3000";
 }
