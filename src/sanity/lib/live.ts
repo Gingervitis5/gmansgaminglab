@@ -8,7 +8,7 @@ const token = process.env.SANITY_API_READ_TOKEN;
 if (!token){
   throw new Error("SANITY_API_READ_TOKEN is not set");
 }
-console.log("Secret key prefix:", process.env.CLERK_SECRET_KEY?.substring(0, 8));
+
 export const { sanityFetch, SanityLive } = defineLive({
   client,
   serverToken: token,
