@@ -12,10 +12,14 @@ const BlogPage = async () => {
   const blogs = await getAllBlogs(6);
 
   return (
-    <div className="py-10">
+    <div className="py-5">
+      <div 
+        className="bg-[url(/images/playmats/Cultist_Temple_Map_Watermarked.png)] bg-cover bg-center mt-4 mb-4 py-16 md:py-20 rounded-lg lg:w-full flex items-center justify-center"
+      >
+        <Title className="underline underline-offset-4 decoration-1 uppercase tracking-wider text-shop_light_blue">Browse all blogs</Title>
+      </div>
       <Container>
-        <Title className="mb-5 underline underline-offset-4 decoration-1 uppercase tracking-wider">Browse all blogs</Title>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5 md:mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {blogs?.map((blog) => (
             <div key={blog?._id} className="overflow-hidden group border-shop_light_blue border-2 rounded-md">
               {blog?.mainImage && (
