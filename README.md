@@ -30,8 +30,12 @@ The Stripe webhook and digital map delivery flow require these environment varia
 - `SANITY_API_TOKEN`
 - `RESEND_API_KEY`
 - `ORDER_FROM_EMAIL`
+- `SUPPORT_EMAIL`
+- `CONTACT_FROM_EMAIL` (optional)
 
 `ORDER_FROM_EMAIL` must be a sender address that is verified with your email provider.
+`SUPPORT_EMAIL` is the inbox that receives messages from the contact page.
+`CONTACT_FROM_EMAIL` can be used to override the sender address for contact-form emails.
 
 ## Learn More
 
