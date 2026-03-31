@@ -52,7 +52,8 @@ const PrivacyPage = () => {
       <section className="mb-8">
         <h2 className="text-3xl mb-4">4. Data Sharing</h2>
         <p className="text-xl text-shop_light_blue leading-relaxed">
-        GMan's Gaming Lab uses third party software to manage user authentication and accounts. They may collect and process certain personal information as part of their services.
+        We use Clerk (clerk.com) for user authentication and identity management. Clerk acts as a data processor on our behalf.<br/>
+        They may collect and process certain personal information as part of their services.
         </p>
       </section>
 
@@ -60,11 +61,9 @@ const PrivacyPage = () => {
       <section className="mb-8">
         <h2 className="text-3xl mb-4">5. Legal Basis for Processing</h2>
         <p className="text-xl text-shop_light_blue leading-relaxed">
-        GMan's Gaming Lab processes your personal information based on the following legal grounds:
-        <ul className="list-disc list-inside">
-          <li>Consent: We may process your data with your explicit consent, such as when you sign up for our newsletter or create an account.</li>
-          <li>Legal Obligation: We may process your data to comply with legal obligations, such as tax or accounting requirements.</li>
-        </ul>
+          We process your personal information based on the following legal grounds:<br />
+          Consent: We may process your data with your explicit consent, such as when you sign up for our newsletter or create an account.<br />
+          Legal Obligation: We may process your data to comply with legal obligations, such as tax or accounting requirements.
         </p>
       </section>
 
