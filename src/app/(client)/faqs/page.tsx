@@ -31,6 +31,14 @@ const FAQsPage = () => {
         Returns on physical products are accepted within 30 days of delivery. To be eligible for a return, the item must be unused and in the same condition that you received it. It must also be in the original packaging.
         </p>
       </section>
+      {/* Section 4 */}
+      <section className="mb-8">
+        <h2 className="text-3xl mb-4">4. Do I need to create an account to browse the website?</h2>
+        <p className="text-xl text-shop_light_blue leading-relaxed">
+        No, you can browse our website and view products without creating an account.<br />
+        You do have to create an account if you intend to make a purchase as it allows you to save your information for faster checkout and track your orders more easily.
+        </p>
+      </section>
     </div>
   )
 }
