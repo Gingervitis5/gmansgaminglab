@@ -13,13 +13,13 @@ const PriceView = ({price,discount,className}: Props) => {
         <div className={cn("flex items-center gap-2", className)}>
             {price && !discount && (
                 <PriceFormatter 
-                    amount={price}
+                    amount={Math.max(price, 0)}
                     className="text-shop_light_blue font-normal"
                 />
             )}
             {price && discount && (
                 <PriceFormatter 
-                    amount={price - (discount * price) / 100 }
+                    amount={Math.max((price - (discount * price) / 100) , 0)}
                     className="text-shop_orange font-normal"
                 />
             )}

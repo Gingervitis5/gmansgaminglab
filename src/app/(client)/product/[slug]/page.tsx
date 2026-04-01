@@ -38,8 +38,8 @@ const SingleProductPage = async({
                     </SubText>
                     <div className="border-t border-b border-shop_light_blue py-5 grid grid-cols-6 sm:grid-cols-1">
                         <PriceView 
-                            price={product?.price}
-                            discount = {product?.discount}
+                            price={Math.max(product?.price, 0)}
+                            discount={product?.discount}
                             className="text-3xl"
                             />
                     </div>
