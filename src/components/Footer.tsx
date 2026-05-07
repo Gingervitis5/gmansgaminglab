@@ -34,7 +34,7 @@ const Footer = () => {
             </div>
             <div className="ml-8">
               <SubTitle>Quick Links:</SubTitle>
-              <ul className="text-shop_light_blue font-jersey group-hover:text-shop_white">
+              <ul className="text-shop_light_blue font-jersey text-lg group-hover:text-shop_white">
                   {quickLinksData?.map((item)=>(
                     <li key={item?.title}>
                       <Link 
