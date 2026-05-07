@@ -19,9 +19,10 @@ interface Props{
         _key: string;
     }>;
     isAvailable?: string;
+    onImageClick?: (image: any) => void;
 }
 
-const ImageView = ({images = [], isAvailable}: Props) => {
+const ImageView = ({images = [], isAvailable, onImageClick}: Props) => {
     const [active, setActive] = useState(images[0]);
     
   return (
@@ -43,8 +44,9 @@ const ImageView = ({images = [], isAvailable}: Props) => {
                         width={700}
                         height={700}
                         priority
+                        onClick={() => onImageClick?.(active)}
                         className={`w-full h-100 max-h-200 min-h-100 object-contain 
-                        group-hover:scale-100 hoverEffect rounded-md
+                        group-hover:scale-100 hoverEffect rounded-md cursor-pointer
                         ${isAvailable === "unavailable" ? "opacity-50" : ""}`}
                     />
                 </div>
