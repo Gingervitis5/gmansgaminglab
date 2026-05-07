@@ -51,7 +51,7 @@ export async function createCheckoutSession(
             line_items: items?.map((item)=>({
                 price_data:{
                     currency:"USD",
-                    unit_amount: Math.round((item?.product?.price ?? 0) * 100),
+                    unit_amount: Math.round( (Math.max( (item?.product?.price ?? 0) - ( (item?.product?.discount ?? 0) * (item?.product?.price ?? 0) / 100 ), 0 ) ) * 100),
                     product_data:{
                         name: item?.product?.name || "Unknown Product",
                         description: item?.product?.description,
